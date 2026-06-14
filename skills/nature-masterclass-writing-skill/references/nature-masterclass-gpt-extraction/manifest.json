@@ -1,0 +1,23 @@
+{
+  "source_pdf": "C:\\Users\\parag\\Documents\\LLM_skill\\skills\\nature-masterclass-writing-skill\\references\\nature-masterclass-original.pdf",
+  "model": "gpt-4.1",
+  "page_count": 65,
+  "pages": [
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65
+  ],
+  "method": "one OpenAI Responses API call per single-page PDF; no local OCR"
+}

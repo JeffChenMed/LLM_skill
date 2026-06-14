@@ -31,3 +31,5 @@ build/
 *.zip
 *.7z
 *.tar.gz
+_single_page_pdfs/
+**/_single_page_pdfs/
