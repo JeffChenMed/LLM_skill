@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nature Masterclass Writing"
+  short_description: "Write IMRaD manuscripts using Nature Masterclass logic."
+  default_prompt: "Use the Nature Masterclass Writing skill to review and improve this manuscript section."

@@ -1,0 +1,33 @@
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Runtime and cache directories
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+
+# Local secrets and environment files
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Generated temporary outputs
+tmp/
+temp/
+out/
+dist/
+build/
+*.log
+*.zip
+*.7z
+*.tar.gz
