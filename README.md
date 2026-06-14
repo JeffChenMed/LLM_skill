@@ -7,7 +7,7 @@
 - `skills/ajhg-polishing-skill/`：AJHG / Cell 风格的医学科研英文润色 skill，包含 AJHG Perspective PDF 风格参考。
 - `skills/czf-writing-skill/`：CZF 文稿写作总控 skill，按“科学结构 -> 语言润色 -> Word 格式化”的顺序组织工作。
 - `skills/czf-formatting-skill/`：CZF 文稿 Word 格式化 skill，包含格式参考文件。
-- `skills/nature-masterclass-writing-skill/`：基于 Nature Masterclass 思路的科研论文结构化写作 skill。
+- `skills/nature-masterclass-writing-skill/`：基于 Nature Masterclass 思路的科研论文结构化写作 skill，包含原始 Nature Masterclass PDF 参考。
 - `skills/nature-figure/`：Nature / high-impact journal 风格科研图制作与审查 skill，支持 Python 和 R 工作流。
 - `skills/nature-paper2ppt/`：从论文生成中文学术汇报 PPTX 的 skill。
 - `skills/_shared/`：多个 skill 共享的术语、原则或辅助材料。

@@ -1,6 +1,6 @@
 ---
 name: nature-masterclass-writing-skill
-description: Apply Nature Masterclass scientific-writing logic to draft, review, restructure, or polish research manuscripts, abstracts, cover letters, figure legends, and IMRaD sections. Use when Codex needs to improve Introduction, Methods, Results, Discussion, Conclusion, title/abstract, manuscript narrative, paragraph logic, reviewer-facing argument strength, or pre-submission manuscript quality for biomedical or scientific papers.
+description: Apply Nature Masterclass scientific-writing logic to draft, review, restructure, or polish research manuscripts, abstracts, cover letters, figure legends, and IMRaD sections, using the bundled original Nature Masterclass PDF as the controlling reference. Use when Codex needs to improve Introduction, Methods, Results, Discussion, Conclusion, title/abstract, manuscript narrative, paragraph logic, reviewer-facing argument strength, or pre-submission manuscript quality for biomedical or scientific papers.
 ---
 
 # Nature Masterclass Writing Skill
@@ -8,6 +8,16 @@ description: Apply Nature Masterclass scientific-writing logic to draft, review,
 ## Overview
 
 Use this skill to turn a scientific manuscript into a clear argument rather than a data dump. Treat the paper as one main claim supported by Methods, Results, figures, and Discussion; remove or move anything that does not serve that claim.
+
+## Required Source-Reading Step
+
+At the start of every invocation, re-read the bundled source PDF:
+
+- `references/nature-masterclass-original.pdf`
+
+Do not rely on memory from previous sessions or previous uses of this skill. Before drafting, reviewing, or restructuring a manuscript, inspect the relevant portions of the PDF again and use them to recalibrate the manuscript logic, section purpose, paragraph function, and reviewer-facing argument. This required rereading step prevents gradual drift into generic scientific-editing habits.
+
+When the task concerns a specific section, prioritize the PDF material relevant to that section and then apply the workflow below. When direct PDF reading is not technically available, disclose that limitation and use this `SKILL.md` as the fallback, but do not pretend the PDF was reread.
 
 ## Core Principle
 

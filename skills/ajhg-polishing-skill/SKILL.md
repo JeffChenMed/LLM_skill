@@ -11,12 +11,14 @@ Use this skill after the scientific argument is mostly fixed. The goal is not to
 
 ## Required Style-Reading Step
 
-Before polishing, read the bundled AJHG style exemplar:
+At the start of every invocation, re-read the bundled AJHG style exemplar:
 
 - `references/ajhg-dyadic-approach-style-exemplar.pdf`
 - `references/ajhg-style-notes.md`
 
-First inspect the PDF directly when PDF text extraction or visual reading is available. Read the Summary, Introduction opening, and at least several body paragraphs to calibrate grammar, paragraph rhythm, transitions, hedging, and conceptual framing. Use `references/ajhg-style-notes.md` as a compact backup or orientation, not as a replacement when the PDF can be read.
+Do not rely on memory from previous sessions or previous polishing jobs. First inspect the PDF directly when PDF text extraction or visual reading is available. Read the Summary, Introduction opening, and at least several body paragraphs to recalibrate grammar, paragraph rhythm, transitions, hedging, and conceptual framing before touching the user's text. Use `references/ajhg-style-notes.md` as a compact backup or orientation, not as a replacement when the PDF can be read.
+
+This rereading step is mandatory because repeated polishing from memory can drift toward generic high-level biomedical prose. If direct PDF reading is not technically available, disclose that limitation and use `references/ajhg-style-notes.md` as the fallback, but do not pretend the PDF was reread.
 
 Do not copy the exemplar's content, citations, disease examples, or distinctive phrases into the user's manuscript unless they are scientifically appropriate and supplied by the user. The PDF is a grammar and style model, not a source to cite or paraphrase.
 

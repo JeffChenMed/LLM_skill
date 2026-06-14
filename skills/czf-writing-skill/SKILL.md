@@ -7,11 +7,13 @@ description: Orchestrate the user's preferred manuscript workflow: first use nat
 
 ## Required Sequence
 
-Use this skill as an orchestrator. Do the work in this order:
+Use this skill as an orchestrator. The sequence below is mandatory for end-to-end CZF manuscript work. Do not skip, merge, or reorder these passes unless the user explicitly asks for only one named subtask.
 
-1. **Scientific writing pass**: Use `nature-masterclass-writing-skill` first. Establish the main claim, IMRaD logic, reviewer-facing argument, section function, and evidence hierarchy. Do not polish around weak scientific logic.
-2. **Prose polishing pass**: Use `ajhg-polishing-skill` next. Convert the settled content into restrained, concept-first, high-level scientific prose. If the user writes `ajhg-poilsh-skill`, treat it as `ajhg-polishing-skill`.
-3. **Formatting pass**: Use `czf-formatting-skill` last to apply the project's Word manuscript formatting.
+1. **First, use `nature-masterclass-writing-skill` to write or revise the scientific structure.** Establish the main claim, IMRaD logic, reviewer-facing argument, section function, evidence hierarchy, and limits of inference. Do not polish around weak scientific logic.
+2. **Second, use `ajhg-polishing-skill` to polish the settled prose.** Convert the scientifically settled content into restrained, concept-first, high-level AJHG/Cell-style biomedical prose. If the user writes `ajhg-poilsh-skill`, treat it as `ajhg-polishing-skill`.
+3. **Third, use `czf-formatting-skill` to format the final manuscript output.** Apply the project's Word manuscript formatting only after the writing and polishing passes are complete.
+
+When reporting work back to the user, preserve this order in the summary: Nature Masterclass writing pass -> AJHG polishing pass -> CZF formatting pass.
 
 ## If CZF Formatting Skill Is Missing
 
