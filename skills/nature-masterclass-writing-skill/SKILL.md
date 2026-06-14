@@ -1,6 +1,6 @@
 ---
 name: nature-masterclass-writing-skill
-description: Apply Nature Masterclass scientific-writing logic to draft, review, restructure, or polish research manuscripts, abstracts, cover letters, figure legends, and IMRaD sections, using the bundled original Nature Masterclass PDF as the controlling reference. Use when Codex needs to improve Introduction, Methods, Results, Discussion, Conclusion, title/abstract, manuscript narrative, paragraph logic, reviewer-facing argument strength, or pre-submission manuscript quality for biomedical or scientific papers.
+description: Apply Nature Masterclass scientific-writing logic to draft, review, restructure, or polish research manuscripts, abstracts, cover letters, figure legends, and IMRaD sections, using the bundled GPT-extracted Nature Masterclass reference markdown as the controlling source. Use when Codex needs to improve Introduction, Methods, Results, Discussion, Conclusion, title/abstract, manuscript narrative, paragraph logic, reviewer-facing argument strength, or pre-submission manuscript quality for biomedical or scientific papers.
 ---
 
 # Nature Masterclass Writing Skill
@@ -11,13 +11,17 @@ Use this skill to turn a scientific manuscript into a clear argument rather than
 
 ## Required Source-Reading Step
 
-At the start of every invocation, re-read the bundled source PDF:
+At the start of every invocation, read and use the bundled GPT-extracted Nature Masterclass reference:
 
-- `references/nature-masterclass-original.pdf`
+- Combined reference: `references/nature-masterclass-gpt-extraction/nature-masterclass-gpt-extraction.md`
+- Page-level references: `references/nature-masterclass-gpt-extraction/pages/page-001.md` through `page-065.md`
+- Original source for spot checks only: `references/nature-masterclass-original.pdf`
 
-Do not rely on memory from previous sessions or previous uses of this skill. Before drafting, reviewing, or restructuring a manuscript, inspect the relevant portions of the PDF again and use them to recalibrate the manuscript logic, section purpose, paragraph function, and reviewer-facing argument. This required rereading step prevents gradual drift into generic scientific-editing habits.
+Do not rely on memory from previous sessions or previous uses of this skill. Before drafting, reviewing, or restructuring a manuscript, inspect the relevant extracted markdown again and use it to recalibrate manuscript logic, section purpose, paragraph function, sentence-level clarity, and reviewer-facing argument. This required rereading step prevents gradual drift into generic scientific-editing habits.
 
-When the task concerns a specific section, prioritize the PDF material relevant to that section and then apply the workflow below. When direct PDF reading is not technically available, disclose that limitation and use this `SKILL.md` as the fallback, but do not pretend the PDF was reread.
+First summarize the relevant Nature Masterclass principles from the extracted markdown in working notes, then apply those principles to the user's text. When the task concerns a specific section, prioritize the pages whose headings and writing principles match that section. Use the original PDF only if a page-level extraction is unclear or needs verification; do not treat the scanned PDF as the primary working source.
+
+If the extracted markdown is unavailable, disclose that limitation and use this `SKILL.md` as the fallback. Do not pretend the Nature Masterclass reference was consulted.
 
 ## Core Principle
 
