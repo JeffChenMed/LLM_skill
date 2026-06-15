@@ -65,7 +65,7 @@ inside a larger *Nature*-style result figure.
 
 ## File structure
 
-The skill uses a router/static-dynamic split (like `nature-writing`, `nature-polishing`, `nature-reader`, and `nature-paper2ppt`): a short `SKILL.md` router plus a `manifest.yaml` that loads the always-on core, the selected backend fragment, and references on demand.
+The skill uses a router/static-dynamic split: a short `SKILL.md` router plus a `manifest.yaml` that loads the always-on core, the selected backend fragment, and references on demand.
 
 ```
 nature-figure/

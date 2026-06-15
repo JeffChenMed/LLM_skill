@@ -57,4 +57,4 @@ The files under `references/` are deep references, not defaults. Open them on de
 - The static layer is versioned and reviewable. The backend gate is now explicit in the manifest rather than buried in prose.
 - The dynamic layer keeps each invocation cheap: only the selected backend's quick-start enters context, and the 2,600+ lines of reference depth load only when a step needs them.
 - The router itself is short on purpose. Update fragments and references, not this file, when adding scope.
-- This structure mirrors `nature-writing`, `nature-polishing`, `nature-reader`, and `nature-paper2ppt`.
+- This structure mirrors the broader router/static-dynamic pattern used by layered Codex skills.

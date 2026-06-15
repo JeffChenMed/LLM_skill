@@ -9,7 +9,7 @@
 - `skills/czf-formatting-skill/`：CZF 文稿 Word 格式化 skill，包含格式参考文件。
 - `skills/nature-masterclass-writing-skill/`：基于 Nature Masterclass 思路的科研论文结构化写作 skill，包含原始 Nature Masterclass PDF 参考。
 - `skills/nature-figure/`：Nature / high-impact journal 风格科研图制作与审查 skill，支持 Python 和 R 工作流。
-- `skills/nature-paper2ppt/`：从论文生成中文学术汇报 PPTX 的 skill。
+- `skills/codex-ppt/`：生成视觉统一的图片型 PPT/PPTX 汇报 deck 的 skill。
 - `skills/_shared/`：多个 skill 共享的术语、原则或辅助材料。
 - `THINKING.md`：这些 skill 背后的设计思路和工作原则。
 
@@ -31,7 +31,8 @@ $skills = @(
   "ajhg-polishing-skill",
   "czf-writing-skill",
   "czf-formatting-skill",
-  "nature-masterclass-writing-skill"
+  "nature-masterclass-writing-skill",
+  "codex-ppt"
 )
 
 foreach ($name in $skills) {
