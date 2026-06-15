@@ -1,5 +1,5 @@
 {
-  "source_pdf": "C:\\Users\\parag\\Documents\\LLM_skill\\skills\\nature-masterclass-writing-skill\\references\\nature-masterclass-original.pdf",
+  "source_pdf": "skills/nature-masterclass-writing-skill/references/nature-masterclass-original.pdf",
   "model": "gpt-4.1",
   "page_count": 65,
   "pages": "1-65",

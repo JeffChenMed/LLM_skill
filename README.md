@@ -15,13 +15,37 @@
 
 ## 使用方式
 
-把需要使用的 skill 目录复制或同步到 Codex skills 目录中：
+把需要使用的 skill 目录复制或同步到当前电脑用户的 Codex skills 目录中。不要写死任何 Windows 绝对用户目录，因为不同电脑的用户名不同。
 
 ```powershell
-C:\Users\parag\.codex\skills
+$dest = Join-Path $env:USERPROFILE ".codex\skills"
 ```
 
-每个 skill 的主要入口是对应目录下的 `SKILL.md`。如果 skill 包含 `assets/`、`references/` 或 `static/`，这些文件应与 `SKILL.md` 一起保留。
+在 Windows PowerShell 中安装指定 skill 的例子：
+
+```powershell
+$dest = Join-Path $env:USERPROFILE ".codex\skills"
+New-Item -ItemType Directory -Force -Path $dest | Out-Null
+
+$skills = @(
+  "ajhg-polishing-skill",
+  "czf-writing-skill",
+  "czf-formatting-skill",
+  "nature-masterclass-writing-skill"
+)
+
+foreach ($name in $skills) {
+  Copy-Item -LiteralPath "skills\$name" -Destination $dest -Recurse
+}
+```
+
+在 macOS / Linux 中，Codex skills 目录通常是：
+
+```bash
+~/.codex/skills
+```
+
+每个 skill 的主要入口是对应目录下的 `SKILL.md`。如果 skill 包含 `assets/`、`references/` 或 `static/`，这些文件应与 `SKILL.md` 一起保留。安装或更新 skill 后，重启 Codex 以加载新内容。
 
 ## 维护原则
 
