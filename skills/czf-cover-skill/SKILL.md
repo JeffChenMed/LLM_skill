@@ -1,6 +1,14 @@
 ---
 name: czf-cover-skill
-description: Draft, revise, or critique high-impact biomedical, clinical AI, genetics, rare disease, or translational medicine journal cover letters using the CZF three-question structure: fundamental limitation, conceptual/technical breakthrough, and clinical validation. Use when preparing cover letters for journals such as NEJM AI, Nature Medicine, Cell, AJHG, Lancet Digital Health, or similar venues, especially when the manuscript includes large cohorts, AI/LLM methods, diagnostic frameworks, real-world validation, open resources, or clinical translation claims.
+description: >-
+  Draft, revise, or critique high-impact biomedical, clinical AI, genetics,
+  rare disease, or translational medicine journal cover letters using the CZF
+  three-question structure: fundamental limitation, conceptual/technical
+  breakthrough, and clinical validation. Use when preparing cover letters for
+  journals such as NEJM AI, Nature Medicine, Cell, AJHG, Lancet Digital Health,
+  or similar venues, especially when the manuscript includes large cohorts,
+  AI/LLM methods, diagnostic frameworks, real-world validation, open resources,
+  or clinical translation claims.
 ---
 
 # CZF Cover Skill
