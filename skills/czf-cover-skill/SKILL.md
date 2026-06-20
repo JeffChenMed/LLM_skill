@@ -3,14 +3,13 @@ name: czf-cover-skill
 description: >-
   Draft, revise, or critique high-impact biomedical, clinical AI, genetics,
   rare disease, or translational medicine journal cover letters using the CZF
-  three-question structure: fundamental limitation, conceptual/technical
-  breakthrough, and clinical validation. Use when preparing cover letters for
-  journals such as NEJM AI, Nature Medicine, Cell, AJHG, Lancet Digital Health,
-  or similar venues, especially when the manuscript includes large cohorts,
-  AI/LLM methods, diagnostic frameworks, real-world validation, open resources,
+  three-question structure and the PUMCH/Nan Wu DOCX cover-letter template.
+  Use when preparing template-preserved cover letters for journals such as
+  NEJM AI, Nature Medicine, Cell, AJHG, Lancet Digital Health, or similar
+  venues, especially when the manuscript includes large cohorts, AI/LLM
+  methods, diagnostic frameworks, real-world validation, open resources,
   or clinical translation claims.
 ---
-
 # CZF Cover Skill
 
 ## Core Principle
@@ -28,6 +27,22 @@ The cover letter must answer three non-compressible questions:
 
 Do not compress these questions into generic novelty language. A high-impact cover letter should make the editor feel that the manuscript identifies a field-level constraint, introduces a real way around it, and has enough evidence to matter beyond the authors' dataset.
 
+## Non-Negotiable: PUMCH Cover Letter Template
+
+For full DOCX cover letters, use the PUMCH/Nan Wu template as the governing format. Read `references/pumch-cover-template-contract.md` before creating or revising a DOCX cover letter, and use `assets/pumch-nanwu-cover-template.docx` as the source package unless the user explicitly requests another template.
+
+This requirement is broader than preserving the last signature lines. The whole cover letter format is locked: page geometry, sender block, logo, editor-block structure, font/spacing, body paragraph style, closing pattern, handwritten signature image, and Nan Wu affiliation/contact block. New cover letters should be produced by copying the template DOCX and replacing only the allowed variable text slots.
+
+Hard rules:
+
+- Do not create a new full DOCX cover letter from a blank document when this template is applicable.
+- Do not approximate the template by manually recreating margins, fonts, images, or signature text.
+- Preserve locked template blocks exactly for the same corresponding author: institutional sender block, PUMCH logo, handwritten signature image, Nan Wu typed signature/affiliation/contact block, media relationships, and section properties.
+- Replace only variable slots: editor block, salutation, manuscript title/article type/journal in the opening sentence, scientific body paragraphs, availability/submission-package facts, and the journal name in the closing sentence.
+- Do not add generic sign-offs such as `Sincerely`; this template closes with the source-style thank-you paragraph followed directly by the signature image and Nan Wu block.
+- If the user provides a different corresponding author or signature asset, adapt only the explicitly supplied identity/signature fields and preserve the rest of the template geometry and paragraph system.
+- Before finalizing, structurally verify the output against the template contract, including media files, drawing anchors, locked text sequence, page geometry, and absence of comments/tracked changes.
+
 ## Required Argument Structure
 
 Build the cover letter around this sequence:
@@ -35,10 +50,10 @@ Build the cover letter around this sequence:
 1. **Submission identity**
    State the manuscript title, article type, target journal, and corresponding editorial addressee.
 
-2. **Research lineage and credibility**
-   Briefly establish why this team is credible in the field. Use prior work only to show continuity of scientific purpose, not to list achievements.
+2. **Optional credibility or trajectory, only when it helps**
+   Include prior work, group trajectory, or institutional credibility only when it materially strengthens the editorial argument. Omit this block when it would become a CV paragraph or distract from the manuscript-specific problem.
 
-3. **Fundamental limitation**
+3. **Manuscript-specific fundamental limitation**
    Define the core limitation in the field's current logic. Prefer limitations that are conceptual, diagnostic, methodological, or translational rather than merely operational.
 
 4. **Breakthrough**
@@ -58,11 +73,11 @@ Build the cover letter around this sequence:
 
 ## Non-Negotiable Formatting Essence
 
-Use **bolded micro-headlines** for every major point. The source pattern is not plain prose; it is scan-first editorial argument.
+Use **bolded micro-headlines** for every major point as an argument device, but do not let this create a new DOCX visual system. In PUMCH-template DOCX output, any numbered section labels or bold labels must still use the template paragraph family, font size, spacing, and margins.
 
 Apply this rule at two levels:
 
-- **Section-level headlines**: Use bold, sentence-style headings that state the argument, such as "Addressing fundamental limitations in..." or "Demonstrating clinical performance through...".
+- **Section-level labels**: Use numbered, manuscript-specific labels when they help the editorial argument, but keep them inside the PUMCH template body style for DOCX output. Do not force generic headings such as "Addressing fundamental limitations" into every letter. The first three scientific labels, when used, should normally be numbered: **1. [problem-specific limitation]**, **2. [specific breakthrough/framework]**, and **3. [what the validation or benchmark newly reveals]**.
 - **Point-level labels**: Begin each limitation, breakthrough, bottleneck, or validation pillar with a bold label plus colon, such as "**A many-to-many mapping problem:**", "**Lack of quantitative data:**", "**Catastrophic forgetting during domain adaptation:**", or "**Hallucinated outputs in gene prioritization:**".
 
 Each bolded label must name the issue before the explanation begins. Do not hide the key claim in the middle of a paragraph.
@@ -73,7 +88,7 @@ Other source-derived essentials:
 - **Contrastive framing**: Use "rather than..." / "instead of..." / "bypasses..." to show what the work replaces, not only what it adds.
 - **Bottleneck grammar**: Name the bottleneck, explain why naive approaches fail, state the design choice, then state the practical gain.
 - **Numbers as trust anchors**: Put sample sizes, cohort types, and performance metrics inside the argument, not in a detached statistics list.
-- **Trajectory paragraph**: Use prior publications as a runway into the current work; the message is continuity of purpose, not prestige.
+- **Trajectory paragraph is optional**: Use prior publications or group trajectory only when they make the current manuscript more credible. Do not include a trajectory paragraph by default.
 
 ## The Three Questions in Detail
 
@@ -198,9 +213,9 @@ Then state:
 We are pleased to submit our manuscript entitled "[Title]" for consideration as a [Article Type] at [Journal].
 ```
 
-### Credibility Paragraph
+### Optional Credibility Or Trajectory Paragraph
 
-Function: show continuity and authority.
+Function: show continuity and authority only when it helps the manuscript-specific pitch. This paragraph is optional, not required.
 
 Do:
 
@@ -224,10 +239,10 @@ Building on our prior work in [field], including [representative advances], we r
 
 Function: make the editor see the current field as constrained by a deeper logic problem.
 
-Use a bold or sentence-style heading if the cover letter is long:
+Use a numbered, manuscript-specific heading. The heading should identify the actual limitation in this manuscript, not a reusable slogan.
 
 ```text
-Addressing fundamental limitations in [field/problem]
+**1. [Manuscript-specific fundamental limitation]**
 ```
 
 Then write two or three named limitations. Each limitation should have:
@@ -250,16 +265,10 @@ Current [diagnostic/scientific] logic encounters two significant challenges.
 
 Function: show that the manuscript changes the solution path.
 
-Use a heading such as:
+Use a numbered, manuscript-specific heading. The heading may name a framework, benchmark, architecture, clinical workflow, or conceptual move.
 
 ```text
-Introducing a new framework for [problem]
-```
-
-or:
-
-```text
-Overcoming longstanding technical bottlenecks through [architecture/method]
+**2. [Specific breakthrough, framework, or solution path]**
 ```
 
 For each advance:
@@ -290,15 +299,21 @@ With [architecture], [system] overcomes two key technical bottlenecks.
 [Bottleneck label]: [Standard generation/prediction] is poorly suited to [task] because [failure mode]. We therefore [technical design], enabling [valid, constrained, probabilistic, interpretable, or clinically actionable output].
 ```
 
-### Validation Section
+### Validation / Discovery Section
 
-Function: make the editor trust the maturity of the work.
+Function: make the editor trust the work and understand what the validation newly revealed. This section should not merely say that the work is credible; it should state the new phenomenon, failure mode, boundary condition, or deployment-relevant insight discovered through validation.
 
-Use a heading such as:
+Use a numbered, manuscript-specific heading:
 
 ```text
-Demonstrating clinical performance through real-world, multicenter validation
+**3. [What the validation newly revealed]**
 ```
+
+Examples:
+
+- **3. Revealing structured failure modes rather than random errors**
+- **3. Defining where the model remains reliable under real-world heterogeneity**
+- **3. Showing that clinical utility depends on evidence context, not aggregate accuracy alone**
 
 Include:
 
@@ -345,25 +360,40 @@ Use short, transparent statements:
 ```text
 The system is available at [URL], with code at [URL] and model weights/data at [URL], when applicable.
 
-This submission includes [main text], [figures], [supplementary figures], [supplementary tables], [supplementary notes/materials]. All data required to evaluate the findings are included in the manuscript and supplements.
+This submission includes the main manuscript, [N] main figures, [N] main tables, [N] supplementary figures, [N] supplementary tables, and [N] supplementary notes/materials. All data required to evaluate the findings are included in the manuscript and supplements.
 ```
 
-Only state availability that is true.
+Only state availability that is true. When listing the submission package, use exact counts whenever they are known; do not write generic phrases such as "figures, tables, and supplementary materials" if the actual numbers can be extracted.
 
 ### Closing and Signature
 
-Keep the closing brief:
+For DOCX output under this skill, the PUMCH/Nan Wu template controls the closing and signature format. Do not use a generic sign-off. Use the template closing pattern, followed directly by the handwritten signature image and Nan Wu signature/affiliation/contact block defined in `references/pumch-cover-template-contract.md`.
+
+For plain-text drafting only, mirror the same order:
 
 ```text
-Thank you for your kind consideration.
+Thank you and the editorial team for considering our submission. We look forward to the opportunity for our manuscript to be reviewed by [Journal].
 
-Sincerely,
-[Name, degree]
-[Role]
-[Institution]
-[Department/lab]
-[Address]
-[Email]
+[handwritten signature image in DOCX output]
+Nan Wu, M.D.
+on behalf of all co-authors
+
+Department Vice Chairman, Chief Surgeon & Professor
+Department of Orthopedic Surgery, Peking Union Medical College Hospital (PUMCH)
+
+Laboratory chief
+Key Laboratory of Big Data for Spinal Deformities, Chinese Academy of Medical Sciences (CAMS), https://spinebigdata.com/
+
+PI 
+Peking Union Medical College (PUMC) & CAMS
+State Key Laboratory of Complex Severe and Rare Diseases
+
+Co-founder
+Deciphering disorders Involving Scoliosis and COmorbidities (DISCO) study
+
+Address: No.1 Shuaifuyuan, Beijing 100730
+Tel: +8613520846110
+E-mail: dr.wunan@pumch.cn/nanwu86@gmail.com
 ```
 
 ## Figure Use in a Cover Letter
@@ -421,7 +451,7 @@ Avoid:
 
 ## Formatting Defaults
 
-For a full DOCX cover letter, use formal manuscript letter formatting unless the user or journal specifies otherwise:
+For a full DOCX cover letter, the PUMCH/Nan Wu template overrides generic manuscript-letter defaults. Use `assets/pumch-nanwu-cover-template.docx` and follow `references/pumch-cover-template-contract.md` unless the user explicitly requests a different template. The generic defaults below apply only to plain-text drafts or non-template outputs:
 
 - US Letter or A4 according to local/journal convention.
 - Approximately 1 inch margins.
@@ -447,24 +477,28 @@ When editing an existing DOCX, preserve the user's formatting unless asked to re
 This manuscript matters because [fundamental limitation]; it changes the field by [breakthrough]; and editors can trust it because [clinical validation].
 ```
 
-4. Draft the cover letter using the paragraph-level blueprint.
-5. Check whether every major paragraph answers one of the three core questions.
-6. Remove claims that are not supported by the manuscript.
-7. Polish for restrained high-impact biomedical prose.
+4. For DOCX output, copy `assets/pumch-nanwu-cover-template.docx` and replace only the variable slots defined in `references/pumch-cover-template-contract.md`.
+5. Draft the scientific body using the paragraph-level blueprint while preserving the template paragraph style, run size, line spacing, logo, signature image, and locked sender/signature blocks.
+6. Check whether every major paragraph answers one of the three core questions.
+7. Remove claims that are not supported by the manuscript.
+8. Polish for restrained high-impact biomedical prose.
+9. Run the template verification checklist before delivery.
 
 ## Quality Checklist
 
 Before finalizing, verify:
 
+- The DOCX was generated from `assets/pumch-nanwu-cover-template.docx` unless the user explicitly requested another template.
 - The opening identifies title, article type, and journal.
-- The first substantive paragraph establishes research lineage without becoming a CV.
-- The importance argument is framed as a fundamental limitation.
+- Any credibility or trajectory paragraph, if included, strengthens the manuscript-specific argument and does not become a CV. Omit it when unnecessary.
+- The importance argument is framed as a manuscript-specific fundamental limitation; if a numbered label is used, it begins with "1." and remains in the PUMCH template body style.
 - Each limitation has a mechanism and consequence.
-- The breakthrough is described as a change in logic, architecture, evidence structure, or clinical workflow.
+- The breakthrough is described as a change in logic, architecture, evidence structure, or clinical workflow; if a numbered label is used, it begins with "2." and remains in the PUMCH template body style.
 - Technical breakthroughs are connected to concrete failure modes.
-- Validation includes design, sample size, independence, baselines, and clinically meaningful metrics when available.
+- The validation/discovery section explains what the validation newly revealed, not only why the work is credible; if a numbered label is used, it begins with "3." and remains in the PUMCH template body style.
+- Validation includes design, sample size, independence, baselines, clinically meaningful metrics, and the new insight revealed by the validation when available.
 - The clinical significance paragraph translates performance into use.
-- Availability statements are true and specific.
+- Availability statements are true and specific, and submission-package statements include exact counts when known.
 - Administrative material does not interrupt the scientific argument.
 - No private, unpublished, or identifying details are added unless the user supplied them for the final cover letter.
 
@@ -481,3 +515,8 @@ When the user asks for a quick critique, answer in the three-question structure:
 When the user asks for a full draft, produce a complete letter with the formal blocks above.
 
 When the user asks for revision, preserve accurate manuscript facts and strengthen only the argument, structure, tone, and clarity.
+
+
+
+
+
