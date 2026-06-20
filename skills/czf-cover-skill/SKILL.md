@@ -56,6 +56,25 @@ Build the cover letter around this sequence:
 8. **Submission package and closing**
    List included materials only after the scientific argument is complete. Close briefly and professionally.
 
+## Non-Negotiable Formatting Essence
+
+Use **bolded micro-headlines** for every major point. The source pattern is not plain prose; it is scan-first editorial argument.
+
+Apply this rule at two levels:
+
+- **Section-level headlines**: Use bold, sentence-style headings that state the argument, such as "Addressing fundamental limitations in..." or "Demonstrating clinical performance through...".
+- **Point-level labels**: Begin each limitation, breakthrough, bottleneck, or validation pillar with a bold label plus colon, such as "**A many-to-many mapping problem:**", "**Lack of quantitative data:**", "**Catastrophic forgetting during domain adaptation:**", or "**Hallucinated outputs in gene prioritization:**".
+
+Each bolded label must name the issue before the explanation begins. Do not hide the key claim in the middle of a paragraph.
+
+Other source-derived essentials:
+
+- **Claim-first figure choreography**: Introduce a point, show the figure, then use a caption that states what the figure proves.
+- **Contrastive framing**: Use "rather than..." / "instead of..." / "bypasses..." to show what the work replaces, not only what it adds.
+- **Bottleneck grammar**: Name the bottleneck, explain why naive approaches fail, state the design choice, then state the practical gain.
+- **Numbers as trust anchors**: Put sample sizes, cohort types, and performance metrics inside the argument, not in a detached statistics list.
+- **Trajectory paragraph**: Use prior publications as a runway into the current work; the message is continuity of purpose, not prestige.
+
 ## The Three Questions in Detail
 
 ### 1. Fundamental Limitation
