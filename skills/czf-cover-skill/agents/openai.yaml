@@ -1,0 +1,4 @@
+interface:
+  display_name: "CZF Cover Skill"
+  short_description: "Draft high-impact biomedical cover letters"
+  default_prompt: "Use $czf-cover-skill to draft a high-impact journal cover letter from this manuscript summary."
