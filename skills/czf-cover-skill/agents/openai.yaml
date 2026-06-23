@@ -1,4 +1,4 @@
-interface:
+﻿interface:
   display_name: "CZF Cover Skill"
-  short_description: "Draft template-preserved biomedical cover letters"
-  default_prompt: "Use $czf-cover-skill to draft a high-impact journal cover letter from this manuscript summary, preserving the PUMCH/Nan Wu DOCX template."
+  short_description: "Draft and polish biomedical cover letters"
+  default_prompt: "Use $czf-cover-skill to draft or polish a high-impact journal cover letter from this manuscript summary, preserving the current DOCX format unless a template conversion is requested."

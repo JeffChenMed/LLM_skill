@@ -3,12 +3,13 @@ name: czf-cover-skill
 description: >-
   Draft, revise, or critique high-impact biomedical, clinical AI, genetics,
   rare disease, or translational medicine journal cover letters using the CZF
-  three-question structure and the PUMCH/Nan Wu DOCX cover-letter template.
-  Use when preparing template-preserved cover letters for journals such as
-  NEJM AI, Nature Medicine, Cell, AJHG, Lancet Digital Health, or similar
-  venues, especially when the manuscript includes large cohorts, AI/LLM
-  methods, diagnostic frameworks, real-world validation, open resources,
-  or clinical translation claims.
+  three-question structure. Use for template-preserved PUMCH/Nan Wu DOCX cover
+  letters, and for polishing existing non-template cover letters while preserving
+  their current sender block, closing/signature, and image/no-image format. Use
+  for journals such as NEJM AI, Nature Medicine, Cell, AJHG, Lancet Digital
+  Health, Journal of Infection, or similar venues, especially when manuscripts
+  include large cohorts, diagnostic frameworks, real-world validation, open
+  resources, or clinical translation claims.
 ---
 # CZF Cover Skill
 
@@ -27,21 +28,23 @@ The cover letter must answer three non-compressible questions:
 
 Do not compress these questions into generic novelty language. A high-impact cover letter should make the editor feel that the manuscript identifies a field-level constraint, introduces a real way around it, and has enough evidence to matter beyond the authors' dataset.
 
-## Non-Negotiable: PUMCH Cover Letter Template
+## Formatting Scope: First Identify The Cover-Letter Type
 
-For full DOCX cover letters, use the PUMCH/Nan Wu template as the governing format. Read `references/pumch-cover-template-contract.md` before creating or revising a DOCX cover letter, and use `assets/pumch-nanwu-cover-template.docx` as the source package unless the user explicitly requests another template.
+Before editing or creating a DOCX cover letter, identify whether the task is template-based or existing-format editing.
 
-This requirement is broader than preserving the last signature lines. The whole cover letter format is locked: page geometry, sender block, logo, editor-block structure, font/spacing, body paragraph style, closing pattern, handwritten signature image, and Nan Wu affiliation/contact block. New cover letters should be produced by copying the template DOCX and replacing only the allowed variable text slots.
+**Use the PUMCH/Nan Wu template only when it is applicable.** This means the user asks for the PUMCH/Nan Wu cover-letter template, the corresponding author is Nan Wu/PUMCH, the existing document already uses that template, or the user explicitly asks to convert to that template. In those cases, read `references/pumch-cover-template-contract.md` and use `assets/pumch-nanwu-cover-template.docx` as the source package unless the user explicitly requests another template.
+
+**Do not force the PUMCH/Nan Wu template onto existing non-template letters.** When revising an existing DOCX with another sender, institution, signature block, or no images, preserve that existing head and tail format. Do not add a PUMCH logo, handwritten signature image, Nan Wu affiliation block, or remove a conventional sign-off such as `Sincerely` unless the user explicitly requests a template conversion.
 
 Hard rules:
 
-- Do not create a new full DOCX cover letter from a blank document when this template is applicable.
-- Do not approximate the template by manually recreating margins, fonts, images, or signature text.
-- Preserve locked template blocks exactly for the same corresponding author: institutional sender block, PUMCH logo, handwritten signature image, Nan Wu typed signature/affiliation/contact block, media relationships, and section properties.
-- Replace only variable slots: editor block, salutation, manuscript title/article type/journal in the opening sentence, scientific body paragraphs, availability/submission-package facts, and the journal name in the closing sentence.
-- Do not add generic sign-offs such as `Sincerely`; this template closes with the source-style thank-you paragraph followed directly by the signature image and Nan Wu block.
-- If the user provides a different corresponding author or signature asset, adapt only the explicitly supplied identity/signature fields and preserve the rest of the template geometry and paragraph system.
-- Before finalizing, structurally verify the output against the template contract, including media files, drawing anchors, locked text sequence, page geometry, and absence of comments/tracked changes.
+- For PUMCH/Nan Wu template output, do not create a full DOCX cover letter from a blank document and do not approximate the template by manually recreating margins, fonts, images, or signature text.
+- For PUMCH/Nan Wu template output, preserve locked template blocks exactly for the same corresponding author: institutional sender block, PUMCH logo, handwritten signature image, Nan Wu typed signature/affiliation/contact block, media relationships, and section properties.
+- For PUMCH/Nan Wu template output, replace only variable slots: editor block, salutation, manuscript title/article type/journal in the opening sentence, scientific body paragraphs, availability/submission-package facts, and the journal name in the closing sentence.
+- For PUMCH/Nan Wu template output, do not add generic sign-offs such as `Sincerely`; this template closes with the source-style thank-you paragraph followed directly by the signature image and Nan Wu block.
+- For existing non-template DOCX edits, preserve current page style, sender block, image/no-image state, closing/signature, and correspondence identity unless the user asks for a format change.
+- If the user provides a different corresponding author or signature asset, adapt only the explicitly supplied identity/signature fields and preserve the chosen document format.
+- Before finalizing, structurally verify the output against the chosen format: PUMCH template contract for PUMCH-template output, or the original document structure for existing-format edits.
 
 ## Required Argument Structure
 
@@ -367,9 +370,11 @@ Only state availability that is true. When listing the submission package, use e
 
 ### Closing and Signature
 
-For DOCX output under this skill, the PUMCH/Nan Wu template controls the closing and signature format. Do not use a generic sign-off. Use the template closing pattern, followed directly by the handwritten signature image and Nan Wu signature/affiliation/contact block defined in `references/pumch-cover-template-contract.md`.
+For PUMCH/Nan Wu template output, the template controls the closing and signature format. Do not use a generic sign-off. Use the template closing pattern, followed directly by the handwritten signature image and Nan Wu signature/affiliation/contact block defined in `references/pumch-cover-template-contract.md`.
 
-For plain-text drafting only, mirror the same order:
+For existing non-template cover letters, preserve the existing closing and signature convention unless it is wrong for the target journal or the user asks to change it. A conventional `Sincerely` block, a different corresponding author, or a no-image closing is acceptable when that is the document's current format.
+
+For plain-text PUMCH/Nan Wu drafting only, mirror the same order:
 
 ```text
 Thank you and the editorial team for considering our submission. We look forward to the opportunity for our manuscript to be reviewed by [Journal].
@@ -451,7 +456,7 @@ Avoid:
 
 ## Formatting Defaults
 
-For a full DOCX cover letter, the PUMCH/Nan Wu template overrides generic manuscript-letter defaults. Use `assets/pumch-nanwu-cover-template.docx` and follow `references/pumch-cover-template-contract.md` unless the user explicitly requests a different template. The generic defaults below apply only to plain-text drafts or non-template outputs:
+For PUMCH/Nan Wu template output, the PUMCH/Nan Wu template overrides generic manuscript-letter defaults. Use `assets/pumch-nanwu-cover-template.docx` and follow `references/pumch-cover-template-contract.md` unless the user explicitly requests a different template. For existing non-template DOCX edits, preserve the original document's formatting and image/no-image state unless the user asks for a format change. The generic defaults below apply only to plain-text drafts or non-template outputs:
 
 - US Letter or A4 according to local/journal convention.
 - Approximately 1 inch margins.
@@ -477,8 +482,8 @@ When editing an existing DOCX, preserve the user's formatting unless asked to re
 This manuscript matters because [fundamental limitation]; it changes the field by [breakthrough]; and editors can trust it because [clinical validation].
 ```
 
-4. For DOCX output, copy `assets/pumch-nanwu-cover-template.docx` and replace only the variable slots defined in `references/pumch-cover-template-contract.md`.
-5. Draft the scientific body using the paragraph-level blueprint while preserving the template paragraph style, run size, line spacing, logo, signature image, and locked sender/signature blocks.
+4. For PUMCH/Nan Wu template output, copy `assets/pumch-nanwu-cover-template.docx` and replace only the variable slots defined in `references/pumch-cover-template-contract.md`. For existing non-template DOCX edits, edit the current document in place or on a copy and preserve its existing sender/signature/image structure.
+5. Draft or revise the scientific body using the paragraph-level blueprint while preserving the chosen document format: the PUMCH template style for PUMCH output, or the original page, head, tail, and image/no-image state for existing-format edits.
 6. Check whether every major paragraph answers one of the three core questions.
 7. Remove claims that are not supported by the manuscript.
 8. Polish for restrained high-impact biomedical prose.
@@ -488,7 +493,7 @@ This manuscript matters because [fundamental limitation]; it changes the field b
 
 Before finalizing, verify:
 
-- The DOCX was generated from `assets/pumch-nanwu-cover-template.docx` unless the user explicitly requested another template.
+- The cover-letter format matches the task: PUMCH/Nan Wu template output uses `assets/pumch-nanwu-cover-template.docx`; existing non-template edits preserve the original sender block, closing/signature, and image/no-image state.
 - The opening identifies title, article type, and journal.
 - Any credibility or trajectory paragraph, if included, strengthens the manuscript-specific argument and does not become a CV. Omit it when unnecessary.
 - The importance argument is framed as a manuscript-specific fundamental limitation; if a numbered label is used, it begins with "1." and remains in the PUMCH template body style.
@@ -500,6 +505,7 @@ Before finalizing, verify:
 - The clinical significance paragraph translates performance into use.
 - Availability statements are true and specific, and submission-package statements include exact counts when known.
 - Administrative material does not interrupt the scientific argument.
+- No PUMCH logo, handwritten signature image, or Nan Wu affiliation block is added to a non-template cover letter unless the user explicitly requests that conversion.
 - No private, unpublished, or identifying details are added unless the user supplied them for the final cover letter.
 
 ## Minimal Output Forms

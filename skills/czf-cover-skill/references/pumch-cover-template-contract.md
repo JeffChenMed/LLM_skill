@@ -1,10 +1,14 @@
 # PUMCH/Nan Wu Cover Letter Template Contract
 
-Use `../assets/pumch-nanwu-cover-template.docx` as the canonical DOCX package for full cover-letter deliverables unless the user explicitly asks for a different template. This contract is derived from `coverletter_20260618_LancetDigit.docx` and controls formatting, layout, locked institutional blocks, signature images, and closing structure.
+Use `../assets/pumch-nanwu-cover-template.docx` as the canonical DOCX package only for PUMCH/Nan Wu template-based cover-letter deliverables. This contract is derived from `coverletter_20260618_LancetDigit.docx` and controls formatting, layout, locked institutional blocks, signature images, and closing structure for that template. Do not apply this contract to an existing non-template cover letter unless the user explicitly asks to convert it to the PUMCH/Nan Wu template.
 
 ## Core Rule
 
-Do not recreate this cover-letter format from a blank DOCX. Copy the template DOCX package and replace only the allowed variable text slots. The template controls the Word formatting; the CZF skill controls the scientific argument.
+Do not recreate this cover-letter format from a blank DOCX when the task calls for the PUMCH/Nan Wu template. Copy the template DOCX package and replace only the allowed variable text slots. The template controls the Word formatting; the CZF skill controls the scientific argument.
+
+## Non-Applicability
+
+If the user is revising an existing cover letter with a different institution, corresponding author, signature block, or no images, preserve that document's existing head and tail format. Do not add the PUMCH logo, handwritten signature image, Nan Wu affiliation block, or no-`Sincerely` closing rule unless the user explicitly asks for a PUMCH/Nan Wu template conversion.
 
 ## Page And Style Tokens
 

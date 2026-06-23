@@ -6,6 +6,7 @@
 
 - `skills/ajhg-polishing-skill/`：AJHG / Cell 风格的医学科研英文润色 skill，包含 AJHG Perspective PDF 风格参考。
 - `skills/czf-writing-skill/`：CZF 文稿写作总控 skill，按“科学结构 -> 语言润色 -> Word 格式化”的顺序组织工作。
+- `skills/czf-cover-skill/`：高影响力 biomedical / translational medicine cover letter 起草、润色和审查 skill，使用 CZF 三问结构，并支持 PUMCH/Nan Wu DOCX cover-letter template。
 - `skills/czf-formatting-skill/`：CZF 文稿 Word 格式化 skill，包含格式参考文件。
 - `skills/nature-masterclass-writing-skill/`：基于 Nature Masterclass 思路的科研论文结构化写作 skill，包含原始 Nature Masterclass PDF 参考。
 - `skills/nature-figure/`：Nature / high-impact journal 风格科研图制作与审查 skill，支持 Python 和 R 工作流。
@@ -30,6 +31,7 @@ New-Item -ItemType Directory -Force -Path $dest | Out-Null
 $skills = @(
   "ajhg-polishing-skill",
   "czf-writing-skill",
+  "czf-cover-skill",
   "czf-formatting-skill",
   "nature-masterclass-writing-skill",
   "codex-ppt"
