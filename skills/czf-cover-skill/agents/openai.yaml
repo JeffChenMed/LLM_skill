@@ -1,4 +1,4 @@
-﻿interface:
+interface:
   display_name: "CZF Cover Skill"
-  short_description: "Draft and polish biomedical cover letters"
-  default_prompt: "Use $czf-cover-skill to draft or polish a high-impact journal cover letter from this manuscript summary, preserving the current DOCX format unless a template conversion is requested."
+  short_description: "Nature/AJHG-guided CZF cover letters"
+  default_prompt: "Use $czf-cover-skill to revise this manuscript cover letter by judging content with Nature Masterclass logic, polishing prose in AJHG style, and applying CZF three-part argument formatting."

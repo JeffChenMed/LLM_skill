@@ -3,9 +3,11 @@ name: czf-cover-skill
 description: >-
   Draft, revise, or critique high-impact biomedical, clinical AI, genetics,
   rare disease, or translational medicine journal cover letters using the CZF
-  three-question structure. Use for template-preserved PUMCH/Nan Wu DOCX cover
-  letters, and for polishing existing non-template cover letters while preserving
-  their current sender block, closing/signature, and image/no-image format. Use
+  three-question structure. Use with nature-masterclass-writing-skill to judge
+  manuscript content and ajhg-polishing-skill to polish prose before applying CZF
+  three-part argument formatting. Use for template-preserved PUMCH/Nan Wu DOCX
+  cover letters, and for polishing existing non-template cover letters while
+  preserving sender/signature/image formats or applying user-directed repositioning. Use
   for journals such as NEJM AI, Nature Medicine, Cell, AJHG, Lancet Digital
   Health, Journal of Infection, or similar venues, especially when manuscripts
   include large cohorts, diagnostic frameworks, real-world validation, open
@@ -28,6 +30,18 @@ The cover letter must answer three non-compressible questions:
 
 Do not compress these questions into generic novelty language. A high-impact cover letter should make the editor feel that the manuscript identifies a field-level constraint, introduces a real way around it, and has enough evidence to matter beyond the authors' dataset.
 
+## Required Skill Chain
+
+For manuscript-derived cover letters, this skill is the final structuring and formatting layer, not the first content-generation step.
+
+Use this sequence:
+
+1. **Content judgment with `nature-masterclass-writing-skill`**: read the manuscript and use Nature Masterclass logic to identify the editorial story, central message, and the three strongest editor-facing points. The output should be a content skeleton: fundamental limitation, advance/breakthrough, and validation, boundary, or translatability evidence.
+2. **Prose polish with `ajhg-polishing-skill`**: after the scientific content is chosen, polish the language into restrained, concept-first biomedical prose. Preserve manuscript facts, sample sizes, metrics, uncertainty, and limitations. Do not turn the letter into promotional copy.
+3. **CZF argument formatting with this skill**: turn the polished content into the CZF cover-letter format: numbered bold section-level micro-headlines, bold point-level labels, correct template or non-template DOCX handling, and final structural QA.
+
+If either upstream skill is unavailable, explicitly say so, then approximate the step using the same intent before applying CZF formatting.
+
 ## Formatting Scope: First Identify The Cover-Letter Type
 
 Before editing or creating a DOCX cover letter, identify whether the task is template-based or existing-format editing.
@@ -42,7 +56,7 @@ Hard rules:
 - For PUMCH/Nan Wu template output, preserve locked template blocks exactly for the same corresponding author: institutional sender block, PUMCH logo, handwritten signature image, Nan Wu typed signature/affiliation/contact block, media relationships, and section properties.
 - For PUMCH/Nan Wu template output, replace only variable slots: editor block, salutation, manuscript title/article type/journal in the opening sentence, scientific body paragraphs, availability/submission-package facts, and the journal name in the closing sentence.
 - For PUMCH/Nan Wu template output, do not add generic sign-offs such as `Sincerely`; this template closes with the source-style thank-you paragraph followed directly by the signature image and Nan Wu block.
-- For existing non-template DOCX edits, preserve current page style, sender block, image/no-image state, closing/signature, and correspondence identity unless the user asks for a format change.
+- For existing non-template DOCX edits, preserve current page style, sender block, image/no-image state, closing/signature, and correspondence identity unless the user asks for a format change. If the user asks to move sender details to the signature block, move them there once and remove the duplicated top sender block.
 - If the user provides a different corresponding author or signature asset, adapt only the explicitly supplied identity/signature fields and preserve the chosen document format.
 - Before finalizing, structurally verify the output against the chosen format: PUMCH template contract for PUMCH-template output, or the original document structure for existing-format edits.
 
@@ -474,39 +488,45 @@ When editing an existing DOCX, preserve the user's formatting unless asked to re
 
 ## Drafting Workflow
 
-1. Identify the target journal, article type, editor if known, and whether figures/reviewer suggestions are allowed.
-2. Extract the manuscript's fundamental limitation, breakthrough, and validation evidence.
-3. Build a one-sentence editorial thesis:
+1. Identify the target journal, article type, editor if known, cover-letter type, and whether figures/reviewer suggestions are allowed.
+2. Read the manuscript before revising the letter. Do not simply polish the previous cover letter when the manuscript is available.
+3. Use `nature-masterclass-writing-skill` for content judgment: identify the central message, editor-facing story, fundamental limitation, advance/breakthrough, and validation, boundary, or translatability evidence.
+4. Build a one-sentence editorial thesis:
 
 ```text
-This manuscript matters because [fundamental limitation]; it changes the field by [breakthrough]; and editors can trust it because [clinical validation].
+This manuscript matters because [fundamental limitation]; it changes the field by [breakthrough]; and editors can trust it because [clinical validation or boundary revealed by validation].
 ```
 
-4. For PUMCH/Nan Wu template output, copy `assets/pumch-nanwu-cover-template.docx` and replace only the variable slots defined in `references/pumch-cover-template-contract.md`. For existing non-template DOCX edits, edit the current document in place or on a copy and preserve its existing sender/signature/image structure.
-5. Draft or revise the scientific body using the paragraph-level blueprint while preserving the chosen document format: the PUMCH template style for PUMCH output, or the original page, head, tail, and image/no-image state for existing-format edits.
-6. Check whether every major paragraph answers one of the three core questions.
-7. Remove claims that are not supported by the manuscript.
-8. Polish for restrained high-impact biomedical prose.
-9. Run the template verification checklist before delivery.
+5. Use `ajhg-polishing-skill` to polish the selected content into restrained, concept-first biomedical prose while preserving all manuscript facts and avoiding unsupported claims.
+6. Apply CZF three-part argument formatting: use numbered, manuscript-specific bold section labels for the first three scientific sections and bold point-level labels inside paragraphs where they clarify the argument.
+7. For PUMCH/Nan Wu template output, copy `assets/pumch-nanwu-cover-template.docx` and replace only the variable slots defined in `references/pumch-cover-template-contract.md`. For existing non-template DOCX edits, edit the current document in place or on a copy and preserve its existing sender/signature/image structure unless the user explicitly requests a sender/signature move.
+8. Check whether every major paragraph answers one of the three core questions.
+9. Remove claims that are not supported by the manuscript.
+10. Run the DOCX/template verification checklist before delivery.
 
 ## Quality Checklist
 
 Before finalizing, verify:
 
-- The cover-letter format matches the task: PUMCH/Nan Wu template output uses `assets/pumch-nanwu-cover-template.docx`; existing non-template edits preserve the original sender block, closing/signature, and image/no-image state.
+- The upstream workflow was followed: Nature Masterclass content judgment first, AJHG prose polish second, CZF argument formatting third. If either upstream skill was unavailable, the fallback was stated.
+- The cover-letter format matches the task: PUMCH/Nan Wu template output uses `assets/pumch-nanwu-cover-template.docx`; existing non-template edits preserve the original sender block, closing/signature, and image/no-image state unless the user explicitly requested a sender/signature repositioning.
+- If sender details were moved to the signature block, they appear once at the end and are removed from the top of the letter.
 - The opening identifies title, article type, and journal.
 - Any credibility or trajectory paragraph, if included, strengthens the manuscript-specific argument and does not become a CV. Omit it when unnecessary.
-- The importance argument is framed as a manuscript-specific fundamental limitation; if a numbered label is used, it begins with "1." and remains in the PUMCH template body style.
+- The importance argument is framed as a manuscript-specific fundamental limitation; if a numbered label is used, it begins with "1." and remains in the chosen DOCX body style.
 - Each limitation has a mechanism and consequence.
-- The breakthrough is described as a change in logic, architecture, evidence structure, or clinical workflow; if a numbered label is used, it begins with "2." and remains in the PUMCH template body style.
+- The breakthrough is described as a change in logic, architecture, evidence structure, or clinical workflow; if a numbered label is used, it begins with "2." and remains in the chosen DOCX body style.
 - Technical breakthroughs are connected to concrete failure modes.
-- The validation/discovery section explains what the validation newly revealed, not only why the work is credible; if a numbered label is used, it begins with "3." and remains in the PUMCH template body style.
+- The validation/discovery section explains what the validation newly revealed, not only why the work is credible; if a numbered label is used, it begins with "3." and remains in the chosen DOCX body style.
 - Validation includes design, sample size, independence, baselines, clinically meaningful metrics, and the new insight revealed by the validation when available.
+- Section-level labels and point-level labels are real DOCX bold runs, not literal Markdown markers such as `**label**`.
 - The clinical significance paragraph translates performance into use.
 - Availability statements are true and specific, and submission-package statements include exact counts when known.
 - Administrative material does not interrupt the scientific argument.
 - No PUMCH logo, handwritten signature image, or Nan Wu affiliation block is added to a non-template cover letter unless the user explicitly requests that conversion.
 - No private, unpublished, or identifying details are added unless the user supplied them for the final cover letter.
+- DOCX cleanup is complete: no unintended bullets/numbering, no orphaned formatting artifacts, and no `keepNext`, `keepLines`, or `pageBreakBefore` paragraph controls unless they are required by a locked template.
+- Rendered PDF/PNG QA confirms page count, visible formatting, no black-square formatting markers, and correct closing/signature placement.
 
 ## Minimal Output Forms
 
