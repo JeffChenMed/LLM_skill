@@ -486,6 +486,26 @@ For PUMCH/Nan Wu template output, the PUMCH/Nan Wu template overrides generic ma
 
 When editing an existing DOCX, preserve the user's formatting unless asked to reformat.
 
+### Existing Non-Template DOCX Formatting Defaults
+
+For existing non-template cover letters prepared for biomedical journal submission, unless the source file intentionally uses a journal-specific template or the user requests another format, use the user's current CZF cover-letter rhythm after content revision:
+
+- Use 12 pt Times New Roman body text. Prefer setting the `Normal` style so runs can inherit the font; when producing DOCX programmatically, set OOXML `w:rFonts` for `ascii`, `hAnsi`, `eastAsia`, and `cs` to `Times New Roman` when practical.
+- Set the base `Normal` paragraph format to 1.5 line spacing, `0 pt` before, `6 pt` after, no first-line indent, and no left/right indent.
+- Preserve the formal letter block rhythm rather than forcing a uniform no-blank-paragraph layout:
+  - Editor block lines (`Professor...`, editorial title, journal name): `0 pt` after each line, followed by one blank paragraph after the journal name.
+  - Salutation: `0 pt` after, followed directly by the opening submission sentence.
+  - Opening submission sentence: larger separation before the scientific argument is acceptable; the current CZF cover-letter profile uses about `21.6 pt` after this paragraph.
+  - Numbered CZF section labels: 12 pt bold body paragraphs with `0 pt` after; do not promote them to Word Heading styles, enlarge them, or introduce a new visual hierarchy.
+  - Scientific body paragraphs and the journal-significance paragraph: use `12 pt` after to separate argument blocks.
+  - Submission-package / administrative paragraph: `0 pt` after when followed by the thank-you sentence.
+  - Thank-you sentence and `Sincerely,`: use `12 pt` after.
+  - After `Sincerely,`, preserve the user's signature spacing; the current profile uses blank paragraph spacing before the typed signature block.
+  - Signature block lines: `0 pt` after each line.
+- Do not insert consecutive blank paragraphs elsewhere. Empty paragraphs should be intentional letter-format spacing, not accidental block separators.
+- Preserve the existing sender block, salutation, administrative paragraph, closing, and signature order unless the user explicitly asks to move or restyle them.
+- Before delivery, structurally verify paragraph-by-paragraph spacing, inherited font/size, bold section labels, absence of literal Markdown bold markers, and absence of unintended bullets or numbering artifacts; then render to PDF/PNG and inspect all pages.
+
 ## Drafting Workflow
 
 1. Identify the target journal, article type, editor if known, cover-letter type, and whether figures/reviewer suggestions are allowed.
@@ -541,8 +561,3 @@ When the user asks for a quick critique, answer in the three-question structure:
 When the user asks for a full draft, produce a complete letter with the formal blocks above.
 
 When the user asks for revision, preserve accurate manuscript facts and strengthen only the argument, structure, tone, and clarity.
-
-
-
-
-
