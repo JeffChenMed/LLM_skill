@@ -1,83 +1,104 @@
 ---
 name: czf-formatting-skill
-description: Apply CZF manuscript DOCX formatting for biomedical submission files, including Manuscript_czf style transfer, submission-ready page structure, figure/legend placement, table/figure citation emphasis, metadata cleanup, and render QA. Use when formatting biomedical manuscript DOCX files for this project, preparing JOI/Nature/AJHG-style submission manuscripts, fixing figure legends/tables/references formatting, or when czf-writing-skill reaches its formatting step.
+description: Apply or audit biomedical manuscript DOCX formatting while preserving scientific content, tables, references, and figure pixels. Use when matching a user-provided Manuscript.docx, transferring page setup, fonts, sizes, paragraph spacing, heading hierarchy, bibliography formatting, figure embedding and legends, preparing CZF/Genome Medicine/AJHG/Nature-style Word files, or diagnosing why a generated DOCX differs from a reference.
 ---
 
 # CZF Formatting Skill
 
-## Purpose
+## Scope
 
-Apply the user's CZF manuscript formatting style without changing scientific content. This skill is a formatting layer, not a writing or scientific-editing layer.
+Treat formatting as a separate layer. Do not rewrite scientific content, alter table values, or edit figure artwork unless the user explicitly requests those changes.
 
-## Assets And Scripts
+## Reference precedence
 
-- Use `assets/Manuscript_czf_format_reference.docx` as the local style and layout reference. It was derived from the current `submission/JOI/Manuscript_czf.docx` with Word comments and comment anchors removed.
-- Prefer `scripts/czf_manuscript_format.py` for repeatable post-processing when a manuscript needs figure-page reconstruction, figure-legend normalization, Introduction pagination, or bold Table/Figure citations.
+1. Use a user-provided DOCX as the controlling format reference whenever one is supplied.
+2. Use `assets/Manuscript_czf_format_reference.docx` only when no user reference exists.
+3. Never let bundled defaults override a supplied reference. In particular, do not assume double spacing, centered author blocks, a 16 pt title, forced Introduction pagination, centralized legends, or unembedded figures.
+4. Inspect both style definitions and direct paragraph/run formatting. A reference may use `Normal` plus direct formatting rather than named Heading or Caption styles.
 
-## Core Workflow
+## Required workflow
 
-1. Preserve the user's manuscript content unless explicitly asked to edit text.
-2. Use the format reference to match page setup, paragraph rhythm, heading hierarchy, abstract/body/reference/figure-legend appearance, and overall Word style behavior.
-3. Do not include comments, comment ranges, or reviewer markup in the formatted output unless the user explicitly asks for comments.
-4. Set document metadata author/creator and last modified by fields to Zefu Chen for formatted DOCX/XLSX outputs. When practical, remove stale generator or local-user metadata such as python-docx, openpyxl, WPS Office, Cocoon into butterfly, hdid, and userId.
-5. Keep EndNote/reference fields if they are already part of the working manuscript and the user has not asked to flatten them.
-6. After formatting a DOCX, run the Documents skill render-and-verify workflow when available. If LibreOffice/soffice fails on a Dropbox or non-ASCII path, copy the DOCX to an ASCII temporary directory for conversion, then copy QA outputs back to the workspace.
+### 1. Establish the preservation boundary
 
-## Manuscript Structure Rules
+Before editing, record hashes for source manuscript text and figure files. Treat normalized paragraph text, table-cell text, equations, citations, references, and image pixels as frozen unless instructed otherwise.
 
-- Keep `ABSTRACT` at the start of the manuscript.
-- Force `INTRODUCTION` to begin on a new page with an explicit paragraph page break before the heading. Do not rely on accidental pagination from prior content.
-- Preserve the existing heading ladder for `RESULTS`, `DISCUSSION`, `METHODS`, `ACKNOWLEDGEMENTS`, `AUTHOR CONTRIBUTIONS`, and `REFERENCES` unless the user requests a journal-specific restructure.
-- Do not move, remove, or rewrite scientific content, references, tables, figures, or fields as part of formatting unless asked.
+Splitting one legend body into panel-specific paragraphs is a formatting operation, but verify that normalized text remains identical.
 
-## Figure And Legend Rules
+### 2. Audit the reference and target
 
-Use this structure for submission manuscripts unless the user explicitly asks for a separate centralized legend section:
+Run:
 
-1. Convert each final figure PDF to a high-resolution JPG.
-2. Insert figures after `REFERENCES`.
-3. Put each figure block on its own page: figure JPG first, then its matching legend immediately below it, then a page break before the next figure.
-4. Use inline images, not floating or anchored images, unless the user explicitly needs a different layout.
-5. Scale the image to leave enough room for the legend on the same page. If a double-spaced legend overflows, shrink the image modestly before allowing a split page.
-6. Do not create a standalone `Figure Legends` page when figure legends are supposed to be attached to each figure.
+```bash
+python scripts/audit_docx_reference_format.py \
+  --reference reference.docx \
+  --target manuscript.docx \
+  --expected-figures 7 \
+  --json format_audit.json
+```
 
-Figure legend formatting:
+Review at least:
 
-- The legend title sentence, e.g. `Fig. 1. Study cohort...`, must be bold.
-- The legend body must not be bold.
-- Legend font size must match body text. For the current CZF manuscript template this is 12 pt Times New Roman.
-- Legend line spacing must match body text. For the current CZF manuscript template this is double spacing.
-- Legend paragraphs should use the same body-text font system as the rest of the manuscript.
+- page size, margins, header/footer distances, page numbers, and line numbering;
+- body font, size, alignment, line spacing, paragraph spacing, and indentation;
+- title and front-matter alignment and spacing;
+- section/subsection font hierarchy and pagination;
+- bibliography line spacing, hanging indentation, and item spacing;
+- figure count, inline versus anchored placement, image width, page breaks, and legend formatting;
+- comments, tracked changes, stale identity metadata, and orphaned visible content.
 
-## In-Text Table/Figure Citation Rules
+Do not claim a match from font names or palette alone.
 
-Before `REFERENCES`, bold numbered table and figure citations wherever they appear in prose. Bold only the citation phrase, not the entire sentence.
+### 3. Implement reference-derived formatting
 
-Match at least these forms:
+Prefer a repeatable builder or post-processing script. Derive values from the supplied reference; do not hardcode generic CZF values when they conflict.
 
-- `Figure 1`, `Figures 1 and 2`
-- `Fig. 2`, `Figs. 2 and 3`
-- `Table 1`, `Tables 1 and 2`
-- `Supplementary Table 3`
-- Compound parentheticals such as `Fig. 5, Table 2, and Supplementary Table 5`
+Preserve reference page geometry by starting from a copy of the reference, clearing only the document body, and retaining the section properties, headers, footers, styles, and page-number fields that control layout. Recreate missing styles only when required by target content.
 
-Do not apply this rule to the reference list itself.
+If the target contains tables absent from the reference, preserve their content and use a restrained, readable grid without inventing a new document-wide style system.
 
-## Validation Checklist
+### 4. Handle figures explicitly
 
-After formatting, verify structurally and visually:
+Distinguish two outputs:
 
-- `INTRODUCTION` has explicit page-break-before formatting.
-- Inline image count matches the expected figure count.
-- Each figure page contains one figure followed immediately by its matching legend.
-- Each legend title is bold; each legend body is not bold.
-- Legend font size and line spacing match body text.
-- All numbered Table/Figure/Supplementary Table citations before `REFERENCES` are bold.
-- Render DOCX to PDF/PNG and inspect all pages, especially Introduction and the final figure pages, for blank pages, clipping, overlap, shifted images, or split legends.
+- **Embedded review manuscript**: contains the expected number of inline images.
+- **Journal-clean manuscript**: may contain legends but no images only when that output is explicitly intended.
+
+If the user asks whether figures are embedded, report the inline shape count for each DOCX. Media files present inside the ZIP package do not count as embedded figures unless referenced by a visible drawing.
+
+When the reference embeds figures:
+
+1. Use inline drawings, not floating/anchored drawings, unless the reference does otherwise.
+2. Preserve each image's aspect ratio and source pixels.
+3. Match reference width behavior; do not shrink every image merely to force its full legend onto one page if the reference allows legend spillover.
+4. Follow reference page-break placement.
+5. Match legend font, size, line spacing, paragraph spacing, bold title treatment, and panel-paragraph structure.
+
+### 5. Validate before delivery
+
+Verify structurally:
+
+- normalized manuscript text is unchanged;
+- table-cell text is unchanged;
+- source figure hashes are unchanged;
+- expected inline image count and zero unexpected anchors;
+- reference-format audit passes;
+- comments and stale people metadata are absent;
+- page-number and line-number fields remain present when required.
+
+Render the DOCX when LibreOffice/Word rendering is available and inspect the title page, section transitions, references, every figure page, and long legends. If rendering is unavailable, state that visual pagination remains unrendered and rely on structural checks without overstating completion.
+
+## Existing post-processor
+
+Use `scripts/czf_manuscript_format.py` for citation bolding and figure-block reconstruction when appropriate. Pass reference-derived font, line-spacing, and image-height values rather than accepting generic defaults blindly.
+
+## Metadata
+
+For final CZF outputs, set author/creator and last modified by to Zefu Chen when requested by the project. Remove comments, comment anchors, and stale local identities while preserving EndNote fields unless the user asks to flatten them.
 
 ## Guardrails
 
-- Do not treat the format reference as source content.
-- Do not overwrite the user's manuscript without an explicit request or a backup.
-- Do not remove scientific content, figures, tables, references, fields, or metadata that the user needs preserved.
-- Use structural checks plus rendered-page QA; do not claim success based only on XML or text extraction.
+- Do not treat the reference as source content.
+- Do not overwrite the user's only copy; make a backup.
+- Do not silently deliver a clean manuscript when the user expects embedded figures.
+- Do not change manuscript wording or figure artwork to make pagination easier.
+- Do not call a document reference-matched until structural comparison and, when available, rendered-page QA both pass.

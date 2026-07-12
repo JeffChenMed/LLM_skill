@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Iterable
 
 from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_LINE_SPACING
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.oxml.ns import qn
 from docx.shared import Emu, Pt
 from PIL import Image
@@ -18,7 +18,7 @@ REF_RE = re.compile(
     r"\b(?:Supplementary\s+)?(?:Table|Tables|Figure|Figures|Fig\.|Figs\.)\s+"
     r"\d+(?:[A-Za-z])?(?:\s*(?:,|and|-)\s*\d+(?:[A-Za-z])?)*"
 )
-LEGEND_START_RE = re.compile(r"^Fig\.\s+\d+\.")
+LEGEND_START_RE = re.compile(r"^(?:Fig\.|Figure)\s+\d+\.")
 
 
 def set_run_font(run, name: str = "Times New Roman", size_pt: float = 12.0) -> None:
@@ -55,6 +55,15 @@ def force_introduction_page_break(doc: Document) -> bool:
             paragraph.paragraph_format.page_break_before = True
             return True
     return False
+
+
+def effective_line_spacing(paragraph) -> float | None:
+    value = paragraph.paragraph_format.line_spacing
+    style = paragraph.style
+    while value is None and style is not None:
+        value = style.paragraph_format.line_spacing
+        style = style.base_style
+    return float(value) if isinstance(value, (int, float)) else value
 
 
 def copy_run_format(src, dst) -> None:
@@ -226,7 +235,6 @@ def rebuild_figure_blocks(
         img_para.add_run().add_picture(str(image_path), width=fit_image_width(image_path, max_width, max_image_height))
 
         title_para = doc.add_paragraph()
-        title_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.DOUBLE
         title_para.paragraph_format.line_spacing = line_spacing
         title_para.paragraph_format.space_before = None
         title_para.paragraph_format.space_after = None
@@ -236,7 +244,6 @@ def rebuild_figure_blocks(
 
         if body:
             body_para = doc.add_paragraph()
-            body_para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.DOUBLE
             body_para.paragraph_format.line_spacing = line_spacing
             body_para.paragraph_format.space_before = None
             body_para.paragraph_format.space_after = None
@@ -248,9 +255,17 @@ def rebuild_figure_blocks(
             append_page_break(doc)
 
 
-def audit_doc(doc: Document) -> list[str]:
+def audit_doc(
+    doc: Document,
+    *,
+    require_introduction_break: bool = False,
+    expected_legend_line_spacing: float | None = None,
+) -> list[str]:
     issues = []
-    if not any(p.text.strip().upper() == "INTRODUCTION" and p.paragraph_format.page_break_before for p in doc.paragraphs):
+    if require_introduction_break and not any(
+        p.text.strip().upper() == "INTRODUCTION" and p.paragraph_format.page_break_before
+        for p in doc.paragraphs
+    ):
         issues.append("INTRODUCTION does not have explicit page_break_before.")
 
     stop = stop_before_references(doc)
@@ -272,8 +287,14 @@ def audit_doc(doc: Document) -> list[str]:
         if LEGEND_START_RE.match(text):
             if not all((r.bold is True or r.font.bold is True) for r in paragraph.runs if r.text.strip()):
                 issues.append(f"Legend title not fully bold at paragraph {i}: {text[:50]}")
-            if paragraph.paragraph_format.line_spacing != 2.0:
-                issues.append(f"Legend title line spacing is not double at paragraph {i}.")
+            if (
+                expected_legend_line_spacing is not None
+                and effective_line_spacing(paragraph) != expected_legend_line_spacing
+            ):
+                issues.append(
+                    f"Legend title line spacing does not match {expected_legend_line_spacing} "
+                    f"at paragraph {i}."
+                )
     return issues
 
 
@@ -287,8 +308,13 @@ def main() -> None:
     parser.add_argument("--jpg-dir", type=Path, default=Path("figure_jpg_czf"))
     parser.add_argument("--body-pt", type=float, default=12.0)
     parser.add_argument("--font", default="Times New Roman")
-    parser.add_argument("--line-spacing", type=float, default=2.0)
-    parser.add_argument("--image-height-fraction", type=float, default=0.58)
+    parser.add_argument(
+        "--line-spacing",
+        type=float,
+        help="Legend line-spacing multiple. Defaults to the target document Normal style.",
+    )
+    parser.add_argument("--image-height-fraction", type=float, default=0.93)
+    parser.add_argument("--force-introduction-page-break", action="store_true")
     parser.add_argument("--audit-only", action="store_true")
     args = parser.parse_args()
 
@@ -299,8 +325,13 @@ def main() -> None:
             shutil.copy2(args.docx, backup)
 
     doc = Document(args.docx)
+    line_spacing = args.line_spacing
+    if line_spacing is None:
+        value = doc.styles["Normal"].paragraph_format.line_spacing
+        line_spacing = float(value) if isinstance(value, (int, float)) else 1.5
     if not args.audit_only:
-        force_introduction_page_break(doc)
+        if args.force_introduction_page_break:
+            force_introduction_page_break(doc)
         bold_in_text_citations(doc)
 
         figure_images = list(args.figure_jpg)
@@ -310,11 +341,23 @@ def main() -> None:
 
         if figure_images:
             legends = extract_centralized_legends(doc)
-            rebuild_figure_blocks(doc, figure_images, legends, args.body_pt, args.font, args.line_spacing, args.image_height_fraction)
+            rebuild_figure_blocks(
+                doc,
+                figure_images,
+                legends,
+                args.body_pt,
+                args.font,
+                line_spacing,
+                args.image_height_fraction,
+            )
         doc.save(out)
         doc = Document(out)
 
-    issues = audit_doc(doc)
+    issues = audit_doc(
+        doc,
+        require_introduction_break=args.force_introduction_page_break,
+        expected_legend_line_spacing=line_spacing,
+    )
     if issues:
         print("AUDIT ISSUES")
         for issue in issues:
