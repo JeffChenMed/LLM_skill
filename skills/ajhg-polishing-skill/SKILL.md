@@ -7,7 +7,7 @@ description: Polish biomedical and scientific manuscripts, abstracts, summaries,
 
 ## Purpose
 
-Use this skill after the scientific argument is mostly fixed. The goal is not to make prose casual, promotional, or ornate. The goal is controlled elegance: concept-first framing, precise nouns, calm verbs, and a clear account of what the work defines, clarifies, reconciles, or enables.
+Use this skill after the scientific argument is mostly fixed. The goal is not to make prose casual, promotional, or ornate. The goal is controlled elegance: concept-first framing, precise nouns, calm verbs, and a clear account of what the work establishes, clarifies, tests, or enables.
 
 ## Required Style-Reading Step
 
@@ -28,9 +28,9 @@ The model is the prose logic common in AJHG/Cell perspective and summary writing
 
 - Begin with the conceptual or clinical problem, not generic background.
 - Acknowledge prior work without attacking it.
-- Define the unresolved need as something to characterize, delineate, define, clarify, or locate.
-- Use abstract nouns only when they sharpen the argument: value, yield, distribution, relationship, framework, setting, context, interpretation.
-- Prefer restrained verbs: establish, define, characterize, evaluate, assess, compare, support, preserve.
+- State the unresolved need as something to characterize, delineate, clarify, locate, or test.
+- Use abstract nouns only when they sharpen the argument: value, yield, distribution, relationship, framework, setting, or context.
+- Prefer restrained verbs: establish, characterize, evaluate, assess, compare, support, preserve, quantify, and test.
 - Use `Here, we...` sparingly and only when it cleanly identifies the contribution.
 - Keep repeated key terms stable. Do not cycle synonyms for variety.
 - Prefer balanced clauses that state complexity and then the need for a clearer framework: `X is complex, yet...`; `Whereas prior work..., current evidence...`; `It is essential that... while...`.
@@ -39,7 +39,7 @@ The model is the prose logic common in AJHG/Cell perspective and summary writing
 ## Abstract Workflow
 
 1. Identify the central contribution in one sentence:
-   `This study defines where [test/intervention/phenomenon] is most informative in [population/context], using [design/analysis].`
+   `This study evaluates where [test/intervention/phenomenon] is most informative in [population/context], using [design/analysis].`
 2. Background:
    - Sentence 1: what prior work has established.
    - Sentence 2: what remains less clearly characterized.
@@ -50,11 +50,11 @@ The model is the prose logic common in AJHG/Cell perspective and summary writing
    - Present routine clinical adjudication as a method, not as novelty.
    - Separate primary analysis from secondary or subgroup analyses.
 4. Results:
-   - Keep the main denominator visible.
+   - Keep the analysis population, counting unit, and eligible record count visible.
    - Use plain comparison language such as `records tested by both methods` when appropriate.
-   - Avoid opaque gatekeeping terms such as `interpretable` unless the manuscript explicitly defines them and the audience needs them.
+   - Avoid opaque gatekeeping terms such as `interpretable` unless the manuscript states an operational criterion and the audience needs it.
 5. Conclusions:
-   - State what the results define or clarify.
+   - State what the results establish, clarify, or support.
    - Say where the approach is most informative.
    - Preserve the role of existing standards when warranted, without creating a strawman.
 
@@ -63,7 +63,11 @@ The model is the prose logic common in AJHG/Cell perspective and summary writing
 - Do not use conversational phrases such as `the clinically important question is` unless rewritten formally.
 - Do not write promotional claims such as `revolutionary`, `groundbreaking`, or `game-changing`.
 - Do not attack prior studies. Prefer `further evidence is needed` or `remains less clearly characterized` over `limited by` unless a critique is necessary and supported.
-- Do not over-summarize. Let the study's design, denominator, and analysis carry the force.
+- Do not over-summarize. Let the study's design, analysis population, and results carry the force.
+- Reserve `define`, `defined`, `definition`, and related forms for formal nomenclature or a necessary operational criterion. Do not use them as generic rhetorical verbs for a study's contribution, results, coverage, comparison set, or clinical value.
+- Prefer `analysis population`, `eligible records`, `total`, or the named counting unit over the abstract label `denominator` in reader-facing prose and tables.
+- Do not add explanatory main tables whose columns merely restate claims, limitations, or `Scope`, especially rows dominated by `Not ...`, `outside ...`, or generic interpretation. Keep a table when it reports data, methods, settings, or results that readers need to compare; place concise inference limits in prose, notes, or legends.
+- Avoid a generic `Interpretation` column. Name the specific scientific content instead, such as `comparison`, `evidence source`, `counting unit`, or `inference limit`, and omit the column when it adds no data.
 - Do not direct-quote source articles unless the user explicitly asks. Paraphrase with citation-aware accuracy.
 - Do not imitate the exemplar mechanically. Preserve the user's scientific meaning, target journal, article type, and data structure.
 
@@ -73,5 +77,5 @@ The model is the prose logic common in AJHG/Cell perspective and summary writing
 - `What remains less clearly characterized is...`
 - `Here, we evaluated...`
 - `The primary analysis compared... Secondary analyses assessed...`
-- `These findings define the settings in which...`
+- `These findings identify the settings in which...`
 - `...while preserving the role of...`

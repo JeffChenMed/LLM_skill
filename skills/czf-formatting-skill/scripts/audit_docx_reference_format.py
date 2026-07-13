@@ -22,6 +22,25 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--reference", type=Path, required=True)
     parser.add_argument("--target", type=Path, required=True)
     parser.add_argument("--expected-figures", type=int)
+    parser.add_argument(
+        "--require-section-order",
+        help="Exact paragraph labels separated by '>', in required document order.",
+    )
+    parser.add_argument(
+        "--require-page-break-before",
+        action="append",
+        default=[],
+        help="Exact paragraph label that must have page-break-before; repeat as needed.",
+    )
+    parser.add_argument(
+        "--figures-after-heading",
+        help="Require every visible body drawing to occur after this exact heading.",
+    )
+    parser.add_argument(
+        "--require-figure-legend-pairs",
+        action="store_true",
+        help="Require a visible Figure/Fig. legend after each drawing and before the next drawing.",
+    )
     parser.add_argument("--json", type=Path)
     return parser.parse_args()
 
@@ -194,11 +213,22 @@ def package_signature(path: Path, doc: Document) -> dict[str, Any]:
     with zipfile.ZipFile(path) as archive:
         names = set(archive.namelist())
         document_xml = archive.read("word/document.xml").decode("utf-8", errors="ignore")
-        footer_xml = "".join(
-            archive.read(name).decode("utf-8", errors="ignore")
+        footer_parts = {
+            name: archive.read(name).decode("utf-8", errors="ignore")
             for name in names
             if re.fullmatch(r"word/footer\d+\.xml", name)
-        )
+        }
+        page_number_fields_by_footer = {
+            name: len(
+                re.findall(
+                    r"<w:instrText[^>]*>[^<]*\bPAGE\b[^<]*</w:instrText>",
+                    xml,
+                    flags=re.I,
+                )
+            )
+            for name, xml in footer_parts.items()
+        }
+        page_number_field_count = sum(page_number_fields_by_footer.values())
         media = {
             Path(name).name
             for name in names
@@ -220,18 +250,32 @@ def package_signature(path: Path, doc: Document) -> dict[str, Any]:
         [round(shape.width.inches, 3), round(shape.height.inches, 3)]
         for shape in doc.inline_shapes
     ]
-    usable_width = doc.sections[0].page_width - doc.sections[0].left_margin - doc.sections[0].right_margin
-    full_width = sum(abs(shape.width - usable_width) <= 0.05 * 914400 for shape in doc.inline_shapes)
+    usable_widths = [
+        section.page_width - section.left_margin - section.right_margin
+        for section in doc.sections
+    ]
+    full_width = sum(
+        any(abs(shape.width - usable_width) <= 0.05 * 914400 for usable_width in usable_widths)
+        for shape in doc.inline_shapes
+    )
+    within_page_width = sum(
+        any(shape.width <= usable_width + 0.02 * 914400 for usable_width in usable_widths)
+        for shape in doc.inline_shapes
+    )
     return {
         "inline_figures": len(doc.inline_shapes),
         "anchored_figures": anchors,
         "inline_sizes_in": sizes,
         "full_text_width_figures": full_width,
+        "figures_within_page_width": within_page_width,
         "comments_present": "word/comments.xml" in names,
         "tracked_changes_present": bool(
             re.search(r"<w:(?:ins|del)(?:\s|>)", document_xml)
         ),
-        "page_number_field": "PAGE" in footer_xml,
+        "page_number_field": page_number_field_count > 0,
+        "page_number_field_count": page_number_field_count,
+        "page_number_fields_by_footer": page_number_fields_by_footer,
+        "no_duplicate_page_number_fields": page_number_field_count == 1,
         "orphaned_media": sorted(media - referenced_media),
     }
 
@@ -240,6 +284,10 @@ def signature(path: Path) -> dict[str, Any]:
     doc = Document(path)
     return {
         "section": section_signature(doc),
+        "section_page_sizes_in": [
+            [round(section.page_width.inches, 3), round(section.page_height.inches, 3)]
+            for section in doc.sections
+        ],
         "groups": document_groups(doc),
         "package": package_signature(path, doc),
     }
@@ -284,15 +332,108 @@ def compare_group(reference: dict[str, Any] | None, target: dict[str, Any] | Non
     return comparisons
 
 
+def section_pages_match_reference(reference: dict[str, Any], target: dict[str, Any]) -> bool:
+    """Allow the reference page size and its exact landscape rotation only."""
+    reference_width = float(reference["section"]["page_width_in"])
+    reference_height = float(reference["section"]["page_height_in"])
+    allowed = (
+        (reference_width, reference_height),
+        (reference_height, reference_width),
+    )
+    return all(
+        any(
+            close(width, allowed_width) and close(height, allowed_height)
+            for allowed_width, allowed_height in allowed
+        )
+        for width, height in target["section_page_sizes_in"]
+    )
+
+
+def find_paragraph_index(paragraphs, label: str) -> int | None:
+    return next(
+        (index for index, paragraph in enumerate(paragraphs) if paragraph.text.strip() == label),
+        None,
+    )
+
+
+def has_section_break_before(paragraphs, index: int) -> bool:
+    """Accept a next-page section break as an explicit page start."""
+    return index > 0 and bool(paragraphs[index - 1]._p.xpath("./w:pPr/w:sectPr"))
+
+
+def requested_structure_checks(args: argparse.Namespace, doc: Document) -> dict[str, Any]:
+    paragraphs = doc.paragraphs
+    checks: dict[str, Any] = {}
+    if args.require_section_order:
+        labels = [label.strip() for label in args.require_section_order.split(">") if label.strip()]
+        positions = [find_paragraph_index(paragraphs, label) for label in labels]
+        checks["required_section_order"] = (
+            bool(labels)
+            and all(position is not None for position in positions)
+            and positions == sorted(positions)
+            and len(set(positions)) == len(positions)
+        )
+        checks["required_section_positions"] = dict(zip(labels, positions))
+    if args.require_page_break_before:
+        checks["required_page_breaks"] = {
+            label: (
+                (index := find_paragraph_index(paragraphs, label)) is not None
+                and (
+                    bool(paragraph_value(paragraphs[index], "page_break_before"))
+                    or has_section_break_before(paragraphs, index)
+                )
+            )
+            for label in args.require_page_break_before
+        }
+    drawing_indices = [
+        index for index, paragraph in enumerate(paragraphs) if has_drawing(paragraph)
+    ]
+    if args.figures_after_heading:
+        heading_index = find_paragraph_index(paragraphs, args.figures_after_heading)
+        checks["figures_after_requested_heading"] = (
+            heading_index is not None
+            and all(index > heading_index for index in drawing_indices)
+        )
+        checks["requested_figure_heading_position"] = heading_index
+    if args.require_figure_legend_pairs:
+        pair_count = 0
+        legend_pattern = re.compile(r"^(?:Supplementary\s+)?(?:Fig\.|Figure)\s+S?\d+\.")
+        for position, drawing_index in enumerate(drawing_indices):
+            next_drawing = (
+                drawing_indices[position + 1]
+                if position + 1 < len(drawing_indices)
+                else len(paragraphs)
+            )
+            if any(
+                legend_pattern.match(paragraph.text.strip())
+                for paragraph in paragraphs[drawing_index + 1:next_drawing]
+            ):
+                pair_count += 1
+        checks["figure_legend_pair_count"] = pair_count
+        checks["every_figure_has_adjacent_legend"] = (
+            pair_count == len(drawing_indices)
+            and (
+                args.expected_figures is None
+                or pair_count == args.expected_figures
+            )
+        )
+    return checks
+
+
 def main() -> int:
     args = parse_args()
     reference = signature(args.reference)
     target = signature(args.target)
+    target_doc = Document(args.target)
 
     comparisons: dict[str, Any] = {
         "section": {
             key: close(reference["section"][key], target["section"][key])
             for key in reference["section"]
+        },
+        "section_page_geometry": {
+            "all_sections_match_reference_size_or_rotation":
+                section_pages_match_reference(reference, target),
         },
         "groups": {
             key: compare_group(reference["groups"][key], target["groups"][key])
@@ -305,25 +446,28 @@ def main() -> int:
                 else target["package"]["inline_figures"] == args.expected_figures
             ),
             "no_anchored_figures": target["package"]["anchored_figures"] == 0,
-            "all_inline_figures_full_text_width": (
+            "all_inline_figures_fit_page_width": (
                 target["package"]["inline_figures"] == 0
-                or target["package"]["full_text_width_figures"]
+                or target["package"]["figures_within_page_width"]
                 == target["package"]["inline_figures"]
             ),
             "comments_absent": not target["package"]["comments_present"],
             "tracked_changes_absent": not target["package"]["tracked_changes_present"],
             "page_number_field_present": target["package"]["page_number_field"],
+            "single_page_number_field": target["package"]["no_duplicate_page_number_fields"],
             "no_orphaned_media": not target["package"]["orphaned_media"],
         },
+        "requested_structure": requested_structure_checks(args, target_doc),
     }
     flat = []
     for component in comparisons.values():
         if isinstance(component, dict):
             for value in component.values():
                 if isinstance(value, dict):
-                    flat.extend(value.values())
+                    flat.extend(item for item in value.values() if isinstance(item, bool))
                 else:
-                    flat.append(value)
+                    if isinstance(value, bool):
+                        flat.append(value)
     status = "pass" if all(flat) else "fail"
     payload = {
         "status": status,
