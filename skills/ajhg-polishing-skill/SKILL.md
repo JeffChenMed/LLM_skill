@@ -16,11 +16,11 @@ At the start of every invocation, re-read the bundled AJHG style exemplar:
 - `references/ajhg-dyadic-approach-style-exemplar.pdf`
 - `references/ajhg-style-notes.md`
 
-Do not rely on memory from previous sessions or previous polishing jobs. First inspect the PDF directly when PDF text extraction or visual reading is available. Read the Summary, Introduction opening, and at least several body paragraphs to recalibrate grammar, paragraph rhythm, transitions, hedging, and conceptual framing before touching the user's text. Use `references/ajhg-style-notes.md` as a compact backup or orientation, not as a replacement when the PDF can be read.
+Do not rely on memory from previous sessions or previous polishing jobs. First inspect the PDF directly when PDF text extraction or visual reading is available. Read the Summary, Introduction opening, and at least several body paragraphs to recalibrate grammar, paragraph rhythm, transitions, hedging, and conceptual framing before touching the user’s text. Use `references/ajhg-style-notes.md` as a compact backup or orientation, not as a replacement when the PDF can be read.
 
 This rereading step is mandatory because repeated polishing from memory can drift toward generic high-level biomedical prose. If direct PDF reading is not technically available, disclose that limitation and use `references/ajhg-style-notes.md` as the fallback, but do not pretend the PDF was reread.
 
-Do not copy the exemplar's content, citations, disease examples, or distinctive phrases into the user's manuscript unless they are scientifically appropriate and supplied by the user. The PDF is a grammar and style model, not a source to cite or paraphrase.
+Do not copy the exemplar’s content, citations, disease examples, or distinctive phrases into the user’s manuscript unless they are scientifically appropriate and supplied by the user. The PDF is a grammar and style model, not a source to cite or paraphrase.
 
 ## Style Model
 
@@ -64,16 +64,18 @@ The model is the prose logic common in AJHG/Cell perspective and summary writing
 - Do not use em dashes or en dashes as prose punctuation. Replace the aside with a separate sentence, a direct clause, a colon, or parentheses when essential.
 - Do not use suspended hyphen constructions such as `gene- or disease-level`. Write `gene level or disease level`, or recast the sentence around the underlying relation.
 - When the user prohibits dashes, scan the requested prose literally for `-`, `–`, and `—`. Rewrite every discretionary occurrence. Do not merely delete the character and leave an awkward modifier such as `source linked` or `evidence grounded`; use a clause such as `linked to the source` or `grounded in evidence`.
+- Use the typographic apostrophe `’` (U+2019) in reader-facing English prose. Write `patient’s clinical findings`, `patients’ records`, and `authors’ contributions`; do not use U+0027 for possessives or contractions.
+- Before delivery, scan the manuscript, supplement, tables, figure legends, cover letter, response text, and other reader-facing prose for U+0027. Replace prose apostrophes with U+2019. Do not mechanically alter source code, file paths, URLs, identifiers, markup syntax, or quoted machine-readable strings.
 - Do not use conversational phrases such as `the clinically important question is` unless rewritten formally.
 - Do not write promotional claims such as `revolutionary`, `groundbreaking`, or `game-changing`.
 - Do not attack prior studies. Prefer `further evidence is needed` or `remains less clearly characterized` over `limited by` unless a critique is necessary and supported.
-- Do not over-summarize. Let the study's design, analysis population, and results carry the force.
-- Reserve `define`, `defined`, `definition`, and related forms for formal nomenclature or a necessary operational criterion. Do not use them as generic rhetorical verbs for a study's contribution, results, coverage, comparison set, or clinical value.
+- Do not over-summarize. Let the study’s design, analysis population, and results carry the force.
+- Reserve `define`, `defined`, `definition`, and related forms for formal nomenclature or a necessary operational criterion. Do not use them as generic rhetorical verbs for a study’s contribution, results, coverage, comparison set, or clinical value.
 - Prefer `analysis population`, `eligible records`, `total`, or the named counting unit over the abstract label `denominator` in reader-facing prose and tables.
 - Do not add explanatory main tables whose columns merely restate claims, limitations, or `Scope`, especially rows dominated by `Not ...`, `outside ...`, or generic interpretation. Keep a table when it reports data, methods, settings, or results that readers need to compare; place concise inference limits in prose, notes, or legends.
 - Avoid a generic `Interpretation` column. Name the specific scientific content instead, such as `comparison`, `evidence source`, `counting unit`, or `inference limit`, and omit the column when it adds no data.
 - Do not direct-quote source articles unless the user explicitly asks. Paraphrase with citation-aware accuracy.
-- Do not imitate the exemplar mechanically. Preserve the user's scientific meaning, target journal, article type, and data structure.
+- Do not imitate the exemplar mechanically. Preserve the user’s scientific meaning, target journal, article type, and data structure.
 
 ## Useful Patterns
 

@@ -26,6 +26,7 @@ Its value for this skill is stylistic rather than topical. Do not import its dis
 - Use appositive explanation for technical concepts, but keep the main clause readable.
 - Prefer formal subject nouns over conversational framing: `This approach`, `These findings`, `The current framework`, `The primary analysis`.
 - Avoid em dashes, en dashes used as prose punctuation, and suspended hyphens such as `gene- or disease-level`. Recast the syntax rather than deleting the mark mechanically.
+- Use `’` (U+2019) for apostrophes in reader-facing prose, including possessives and contractions. Audit the final prose for ASCII apostrophes, while leaving code, paths, URLs, identifiers, markup, and machine-readable strings unchanged.
 
 ## Tone
 
@@ -40,4 +41,4 @@ Its value for this skill is stylistic rather than topical. Do not import its dis
 - Rhetorical questions.
 - Casual emphasis.
 - Synonym cycling for key terms.
-- Borrowing the exemplar's specific examples, nomenclature proposal, or citations unless the user's manuscript is actually about that topic.
+- Borrowing the exemplar’s specific examples, nomenclature proposal, or citations unless the user’s manuscript is actually about that topic.
