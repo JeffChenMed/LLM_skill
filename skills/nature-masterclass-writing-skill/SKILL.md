@@ -1,6 +1,6 @@
 ---
 name: nature-masterclass-writing-skill
-description: Apply Nature Masterclass scientific-writing logic to draft, review, restructure, or polish research manuscripts, abstracts, cover letters, figure legends, and IMRaD sections, using the bundled GPT-extracted Nature Masterclass reference markdown as the controlling source. Use when Codex needs to improve Introduction, Methods, Results, Discussion, Conclusion, title/abstract, manuscript narrative, paragraph logic, reviewer-facing argument strength, or pre-submission manuscript quality for biomedical or scientific papers.
+description: Apply Nature Masterclass scientific-writing logic to draft, review, restructure, or polish research manuscripts, abstracts, cover letters, figure legends, and IMRaD sections, using the bundled GPT-extracted Nature Masterclass reference markdown as the controlling source and requiring author confirmation of the core sentence before narrative drafting. Use when Codex needs to improve Introduction, Methods, Results, Discussion, Conclusion, title/abstract, manuscript narrative, paragraph logic, reviewer-facing argument strength, or pre-submission manuscript quality for biomedical or scientific papers.
 ---
 
 # Nature Masterclass Writing Skill
@@ -23,9 +23,21 @@ First summarize the relevant Nature Masterclass principles from the extracted ma
 
 If the extracted markdown is unavailable, disclose that limitation and use this `SKILL.md` as the fallback. Do not pretend the Nature Masterclass reference was consulted.
 
+## Mandatory Core Sentence Checkpoint
+
+Before drafting new manuscript prose or restructuring a manuscript narrative, formulate one candidate core sentence that states the paper’s principal contribution and why it matters. Present the exact sentence to the user, discuss it, and obtain explicit confirmation before writing the Abstract, Introduction, Results, Methods, Discussion, title, figure legends, or cover letter.
+
+Apply the checkpoint as follows:
+
+1. Derive the sentence from the evidence and the author’s intended article identity, not from the most visually prominent experiment.
+2. Ask the user to confirm or revise that sentence. Do not begin narrative drafting while the sentence remains disputed or ambiguous.
+3. If the user has already explicitly confirmed the same sentence in the current conversation, record it in working notes and proceed without asking again.
+4. Map every manuscript section to the confirmed sentence. If later evidence or feedback would materially change the central claim, pause narrative drafting and reconfirm the revised sentence.
+5. Purely mechanical formatting, reference correction, or copyediting that does not alter the argument may use the manuscript’s existing confirmed thesis without reopening the checkpoint.
+
 ## Core Principle
 
-Before editing, identify the manuscript's one-sentence main argument:
+After the checkpoint, use the confirmed one-sentence main argument as the narrative thread:
 
 ```text
 This study shows that [main finding] in [population/system] using [key approach], which matters because [field/clinical/community implication].
@@ -36,10 +48,11 @@ Use this sentence as the narrative thread. If a paragraph, figure, table, or cit
 ## Workflow
 
 1. Identify the target journal, article type, audience, and word/figure limits if available.
-2. Extract the manuscript's main argument, primary evidence, and highest-risk reviewer objections.
-3. Check whether each IMRaD section performs its proper job.
-4. Edit top-down: section purpose, paragraph order, paragraph topic sentence, sentence clarity, then wording.
-5. Preserve factual claims and uncertainty. Do not invent references, data, dates, sample sizes, or journal requirements.
+2. Complete the mandatory core sentence checkpoint and record the confirmed sentence.
+3. Extract the primary evidence and highest-risk reviewer objections around that sentence.
+4. Check whether each IMRaD section performs its proper job.
+5. Edit top-down: section purpose, paragraph order, paragraph topic sentence, sentence clarity, then wording.
+6. Preserve factual claims and uncertainty. Do not invent references, data, dates, sample sizes, or journal requirements.
 
 ## Introduction
 
