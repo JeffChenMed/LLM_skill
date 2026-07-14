@@ -42,6 +42,7 @@ Review at least:
 - page size, margins, header/footer distances, page numbers, and line numbering; count PAGE fields in every footer part and require exactly one visible page-number field unless the reference explicitly requires otherwise;
 - body font, size, alignment, line spacing, paragraph spacing, and indentation;
 - title and front-matter alignment and spacing;
+- front-matter paragraph order, including the exact position of Keywords relative to contribution notes and the Abstract;
 - section/subsection font hierarchy and pagination;
 - bibliography line spacing, hanging indentation, and item spacing;
 - figure count, inline versus anchored placement, image width, page breaks, and legend formatting;
@@ -60,6 +61,8 @@ Preserve reference page geometry by starting from a copy of the reference, clear
 If the target contains tables absent from the reference, preserve their content and use a restrained, readable grid without inventing a new document-wide style system.
 
 Before building, write a short structure contract containing the required top-level section order, headings that start new pages, whether each main table starts a new page, and whether figures must be embedded beside their legends. Implement this contract in the repeatable builder rather than by manually inserting breaks into one output file.
+
+Reproduce the reference placement of Keywords. Do not assume that Keywords follow the Abstract. When the supplied reference places them after author contribution notes and before the Abstract, preserve that order and validate it explicitly with `--require-paragraph-prefix-order`.
 
 ### 4. Handle figures explicitly
 
@@ -91,6 +94,7 @@ Verify structurally:
 - source figure hashes are unchanged;
 - expected inline image count and zero unexpected anchors;
 - requested top-level section order and page-break-before properties;
+- requested front-matter paragraph order, including the position of Keywords;
 - requested table page starts;
 - every expected figure drawing occurs after the Figure Legends heading and has a visible matching legend before the next drawing;
 - reference-format audit passes;

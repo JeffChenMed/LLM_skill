@@ -27,6 +27,10 @@ def parse_args() -> argparse.Namespace:
         help="Exact paragraph labels separated by '>', in required document order.",
     )
     parser.add_argument(
+        "--require-paragraph-prefix-order",
+        help="Paragraph prefixes separated by '>', in required document order.",
+    )
+    parser.add_argument(
         "--require-page-break-before",
         action="append",
         default=[],
@@ -356,6 +360,17 @@ def find_paragraph_index(paragraphs, label: str) -> int | None:
     )
 
 
+def find_paragraph_prefix_index(paragraphs, prefix: str) -> int | None:
+    return next(
+        (
+            index
+            for index, paragraph in enumerate(paragraphs)
+            if paragraph.text.strip().startswith(prefix)
+        ),
+        None,
+    )
+
+
 def has_section_break_before(paragraphs, index: int) -> bool:
     """Accept a next-page section break as an explicit page start."""
     return index > 0 and bool(paragraphs[index - 1]._p.xpath("./w:pPr/w:sectPr"))
@@ -374,6 +389,25 @@ def requested_structure_checks(args: argparse.Namespace, doc: Document) -> dict[
             and len(set(positions)) == len(positions)
         )
         checks["required_section_positions"] = dict(zip(labels, positions))
+    if args.require_paragraph_prefix_order:
+        prefixes = [
+            prefix.strip()
+            for prefix in args.require_paragraph_prefix_order.split(">")
+            if prefix.strip()
+        ]
+        positions = [
+            find_paragraph_prefix_index(paragraphs, prefix)
+            for prefix in prefixes
+        ]
+        checks["required_paragraph_prefix_order"] = (
+            bool(prefixes)
+            and all(position is not None for position in positions)
+            and positions == sorted(positions)
+            and len(set(positions)) == len(positions)
+        )
+        checks["required_paragraph_prefix_positions"] = dict(
+            zip(prefixes, positions)
+        )
     if args.require_page_break_before:
         checks["required_page_breaks"] = {
             label: (
