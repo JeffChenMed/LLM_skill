@@ -60,6 +60,10 @@ The model is the prose logic common in AJHG/Cell perspective and summary writing
 
 ## Sentence-Level Guardrails
 
+- Prefer short or moderate sentences that carry one principal proposition. AJHG elegance does not justify an inventory sentence with several independent clauses or multiple conceptual lists.
+- Do not use em dashes or en dashes as prose punctuation. Replace the aside with a separate sentence, a direct clause, a colon, or parentheses when essential.
+- Do not use suspended hyphen constructions such as `gene- or disease-level`. Write `gene level or disease level`, or recast the sentence around the underlying relation.
+- When the user prohibits dashes, scan the requested prose literally for `-`, `–`, and `—`. Rewrite every discretionary occurrence. Do not merely delete the character and leave an awkward modifier such as `source linked` or `evidence grounded`; use a clause such as `linked to the source` or `grounded in evidence`.
 - Do not use conversational phrases such as `the clinically important question is` unless rewritten formally.
 - Do not write promotional claims such as `revolutionary`, `groundbreaking`, or `game-changing`.
 - Do not attack prior studies. Prefer `further evidence is needed` or `remains less clearly characterized` over `limited by` unless a critique is necessary and supported.
